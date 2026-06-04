@@ -10,17 +10,17 @@ export default function Nav() {
   return (
     <header className="border-b border-border">
       <nav
-        className="mx-auto flex max-w-5xl items-center justify-between px-6 py-5"
+        className="flex w-full items-center justify-between gap-4 px-6 py-5 sm:px-8"
         aria-label="Main navigation"
       >
         <Link
           href="/"
-          className="text-sm font-medium tracking-wide text-foreground transition-opacity hover:opacity-70"
+          className="shrink-0 text-sm font-medium tracking-wide text-foreground transition-opacity hover:opacity-70"
         >
           miriniko.design
         </Link>
 
-        <ul className="flex flex-wrap items-center gap-6 sm:gap-8">
+        <ul className="flex shrink-0 flex-wrap items-center justify-end gap-6 sm:gap-8">
           {navItems.map(({ href, label }) => (
             <li key={href}>
               <Link
