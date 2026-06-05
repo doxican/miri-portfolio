@@ -9,7 +9,7 @@ export default function Home() {
           <h1 className="text-4xl font-medium leading-tight tracking-tight sm:text-5xl">
             Hi, I&apos;m Miri
           </h1>
-          <p className="max-w-prose text-xl leading-relaxed text-muted sm:text-2xl">
+          <p className="max-w-prose text-[18px] leading-relaxed text-muted sm:text-[22px]">
             Product designer bridging policy thinking and digital experience —
             with a focus on service design
           </p>
