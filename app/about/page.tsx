@@ -28,32 +28,36 @@ const employmentHistory = [
 
 const notableProjects = [
   {
-    company: "Company Name",
-    location: "City, Country",
+    company: "London Borough of Hounslow",
+    location: "London, UK",
     roles: [
       {
-        title: "Senior Product Designer",
-        dates: "2022 - Present",
+        title: "Service Designer — GovService Platform",
+        dates: "2025–2026",
         highlights: [
-          "Placeholder highlight about a key project outcome.",
-          "Placeholder highlight about research, design, or delivery work.",
-          "Placeholder highlight about cross-functional collaboration.",
+          "Designed an end-to-end digital service to manage consultation and engagement projects across a central service team, covering intake through to publication.",
+          "Mapped existing workflows and designed the service architecture, user journeys, and interface across multiple user roles within an established government platform.",
+          "Developed a reporting dashboard giving teams real-time visibility of project stages, supporting accountability and decision-making across the organisation.",
         ],
+        fullDescription:
+          "Working within the constraints of an existing government platform, identified pain points across the team's fragmented manual processes and redesigned them as a structured, trackable digital workflow. The service reduced ambiguity at each handoff stage and gave leadership clear oversight of consultation activity across the organisation.",
       },
     ],
   },
   {
-    company: "Another Company",
-    location: "City, Country",
+    company: "Chainhound",
+    location: "Remote",
     roles: [
       {
-        title: "UX Researcher",
-        dates: "2020 - 2022",
+        title: "UX/UI Designer",
+        dates: "2024–2025",
         highlights: [
-          "Placeholder highlight about user research methods used.",
-          "Placeholder highlight about insights that shaped product decisions.",
-          "Placeholder highlight about impact on the team or product.",
+          "Designed lo-fi and hi-fi wireframes for an MVP dashboard aggregating data from over 100 blockchains into a single accessible platform.",
+          "Developed a comprehensive design system and UI to support a product serving both first-time blockchain users and experienced professionals.",
+          "Led feature identification and user story mapping to define scope and prioritise the core dashboard experience ahead of launch.",
         ],
+        fullDescription:
+          "Chainhound is a blockchain data aggregator bringing together insights from over 100 individual blockchains into one platform. Working across the full design process — from user stories and wireframes through to high-fidelity UI and design system — I shaped the MVP experience to make complex blockchain data approachable for new users while remaining useful to professionals. The product was designed with a clear growth path: a free dashboard at launch, expanding into premium content and an enterprise API for businesses needing integrated blockchain data.",
       },
     ],
   },

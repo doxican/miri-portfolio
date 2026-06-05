@@ -4,6 +4,7 @@ type ProjectRole = {
   title: string;
   dates: string;
   highlights: string[];
+  fullDescription?: string;
 };
 
 type NotableProjectEntryProps = {
@@ -44,8 +45,8 @@ export default function NotableProjectEntry({
                     Full description
                   </summary>
                   <p className="mt-3 text-sm leading-relaxed text-muted">
-                    Additional details placeholder. Replace with a longer role
-                    description when ready.
+                    {role.fullDescription ??
+                      "Additional details placeholder. Replace with a longer role description when ready."}
                   </p>
                 </details>
               </li>
