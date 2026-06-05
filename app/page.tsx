@@ -7,11 +7,11 @@ export default function Home() {
         <div className="space-y-6">
           <p className="text-sm uppercase tracking-widest text-muted">Home</p>
           <h1 className="text-4xl font-medium leading-tight tracking-tight sm:text-5xl">
-            Your name here
+            Hi, I&apos;m Miri
           </h1>
-          <p className="max-w-prose text-lg leading-relaxed text-muted">
-            A short introduction goes here. Replace this with a summary of who
-            you are and what you do.
+          <p className="max-w-prose text-xl leading-relaxed text-muted sm:text-2xl">
+            Product designer bridging policy thinking and digital experience —
+            with a focus on service design
           </p>
         </div>
 
