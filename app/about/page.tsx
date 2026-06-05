@@ -72,18 +72,29 @@ export default function About() {
       <section className="mb-20 grid gap-12 md:grid-cols-[1fr_280px] md:items-start">
         <header className="max-w-3xl space-y-6">
           <h1 className="text-4xl font-medium tracking-tight sm:text-5xl">
-            I&apos;m Your Name
+            I&apos;m Miri
           </h1>
           <div className="space-y-4 text-lg leading-relaxed text-muted">
             <p>
-              Replace this with a short bio covering your role, focus areas, and
-              what you help teams achieve. Mention product design, user research,
-              or other specialties relevant to your work.
+              I&apos;m a product and service designer with a background in public
+              policy and government services. I design digital experiences that
+              are intuitive, accessible, and grounded in real user needs —
+              drawing on years of working inside the systems I now help
+              redesign.
             </p>
             <p>
-              Add a second paragraph with additional context — years of
-              experience, industries, or the types of problems you enjoy
-              solving.
+              Before moving fully into design, I spent several years as a policy
+              officer at the Department of Education, leading digital
+              transformation projects and shaping services used by school
+              leaders, staff, and communities. That experience taught me how to
+              navigate complexity, work across stakeholders, and design with
+              both the user and the system in mind.
+            </p>
+            <p>
+              I&apos;m currently focused on service design, dashboards, and
+              digital apps — particularly for government and public sector
+              organisations where good design genuinely changes people&apos;s
+              lives.
             </p>
           </div>
         </header>
