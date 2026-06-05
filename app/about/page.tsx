@@ -17,10 +17,36 @@ const employmentHistory = [
     location: "Remote",
     roles: [
       {
-        title: "Product Designer",
-        dates: "Jan 2020 - Present",
+        title: "Product and Service Designer",
+        dates: "2023–Present",
         description:
-          "Placeholder description. Summarize your focus areas, the types of products you work on, and how you partner with teams.",
+          "Working with clients to define, design and deliver end-to-end digital services and products, from user research and service architecture through to wireframes, UI design, and design systems.",
+        fullDescription:
+          "Freelance practice working with government, health, and product-led organisations. For selected client work and project detail, see Notable Projects & Platforms below.",
+      },
+    ],
+  },
+  {
+    company: "Department of Education",
+    location: "Australia",
+    roles: [
+      {
+        title: "Manager, Policy",
+        dates: "2020–2022",
+        description:
+          "Designed and delivered two internal digital platforms serving 1,500+ users across the department, combining policy expertise with a user-centred approach to solve real operational problems.",
+        fullDescriptionSections: [
+          {
+            title: "Platform 1 — School Asset Management Tool",
+            description:
+              "Designed an internal database for logging and tracking identified school defects, with integrated calendar and budget functionality to support management oversight and reporting. The platform replaced fragmented manual processes with a structured, searchable system that gave teams visibility across maintenance schedules and financial planning.",
+          },
+          {
+            title: "Platform 2 — Approval Workflow Application",
+            description:
+              "Designed an end-to-end approval workflow application facilitating assessment, review, and sign-off stages for internal requests. The service reduced ambiguity at each handoff point and gave decision-makers a clear, auditable view of progression through the approval process.",
+          },
+        ],
       },
     ],
   },
@@ -131,7 +157,10 @@ export default function About() {
             </div>
 
             <div className="space-y-6">
-              <h3 className="text-xl font-medium tracking-tight">
+              <h3
+                id="notable-projects"
+                className="text-xl font-medium tracking-tight"
+              >
                 Notable Projects &amp; Platforms
               </h3>
               <p className="max-w-3xl text-muted">

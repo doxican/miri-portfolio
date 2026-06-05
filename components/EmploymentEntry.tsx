@@ -4,11 +4,14 @@ type EmploymentRole = {
   title: string;
   dates: string;
   description: string;
+  fullDescription?: string;
+  fullDescriptionLink?: { href: string; label: string };
+  fullDescriptionSections?: { title: string; description: string }[];
 };
 
 type EmploymentEntryProps = {
   company: string;
-  type: string;
+  type?: string;
   location: string;
   roles: EmploymentRole[];
 };
@@ -27,7 +30,7 @@ export default function EmploymentEntry({
           <div>
             <h4 className="text-lg font-medium">{company}</h4>
             <p className="text-sm text-muted">
-              {type} · {location}
+              {type ? `${type} · ${location}` : location}
             </p>
           </div>
 
@@ -45,10 +48,41 @@ export default function EmploymentEntry({
                   <summary className="cursor-pointer text-sm text-muted underline underline-offset-4 transition-colors hover:text-foreground">
                     Full description
                   </summary>
-                  <p className="mt-3 text-sm leading-relaxed text-muted">
-                    Additional details placeholder. Replace with a longer role
-                    description when ready.
-                  </p>
+                  <div className="mt-3 space-y-4">
+                    {role.fullDescriptionSections ? (
+                      role.fullDescriptionSections.map((section) => (
+                        <div key={section.title} className="space-y-2">
+                          <p className="text-sm font-medium text-foreground">
+                            {section.title}
+                          </p>
+                          <p className="text-sm leading-relaxed text-muted">
+                            {section.description}
+                          </p>
+                        </div>
+                      ))
+                    ) : role.fullDescription ? (
+                      <p className="text-sm leading-relaxed text-muted">
+                        {role.fullDescription}
+                        {role.fullDescriptionLink && (
+                          <>
+                            {" "}
+                            <a
+                              href={role.fullDescriptionLink.href}
+                              className="text-foreground underline underline-offset-4 transition-colors hover:opacity-70"
+                            >
+                              {role.fullDescriptionLink.label}
+                            </a>
+                            .
+                          </>
+                        )}
+                      </p>
+                    ) : (
+                      <p className="text-sm leading-relaxed text-muted">
+                        Additional details placeholder. Replace with a longer
+                        role description when ready.
+                      </p>
+                    )}
+                  </div>
                 </details>
               </li>
             ))}
