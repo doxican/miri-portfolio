@@ -1,26 +1,272 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 import ImagePlaceholder from "@/components/ImagePlaceholder";
+import { getProject, projects } from "@/lib/projects";
 
 type CaseStudyPageProps = {
   params: Promise<{ slug: string }>;
 };
 
+export function generateStaticParams() {
+  return projects.map((project) => ({ slug: project.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: CaseStudyPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const project = getProject(slug);
+
+  if (!project) {
+    return { title: "Project not found" };
+  }
+
+  return {
+    title: project.title,
+    description: Array.isArray(project.overview)
+      ? project.overview[0]
+      : project.overview,
+  };
+}
+
 export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
   const { slug } = await params;
-  const title = slug.replace(/-/g, " ");
+  const project = getProject(slug);
+
+  if (!project) {
+    notFound();
+  }
 
   return (
     <main className="mx-auto w-full max-w-4xl flex-1 px-6 py-16 sm:py-20">
-      <header className="mb-12 space-y-4">
+      <Link
+        href="/work"
+        className="mb-10 inline-block text-sm text-muted transition-colors hover:text-foreground"
+      >
+        ← Back to work
+      </Link>
+
+      <header className="mb-12 space-y-6">
         <p className="text-sm uppercase tracking-widest text-muted">Case study</p>
-        <h1 className="text-4xl font-medium capitalize tracking-tight">
-          {title}
+        <h1 className="text-4xl font-medium tracking-tight sm:text-5xl">
+          {project.title}
         </h1>
-        <p className="text-muted">
-          Case study content placeholder. Replace with your project details.
-        </p>
+        <p className="text-xl text-muted">{project.subtitle}</p>
+
+        <dl className="grid gap-4 border-t border-border pt-6 text-sm sm:grid-cols-2">
+          <div>
+            <dt className="text-muted">Client</dt>
+            <dd className="mt-1 font-medium">{project.client}</dd>
+          </div>
+          <div>
+            <dt className="text-muted">Role</dt>
+            <dd className="mt-1 font-medium">{project.role}</dd>
+          </div>
+          <div>
+            <dt className="text-muted">Dates</dt>
+            <dd className="mt-1 font-medium">{project.dates}</dd>
+          </div>
+          <div>
+            <dt className="text-muted">Location</dt>
+            <dd className="mt-1 font-medium">{project.location}</dd>
+          </div>
+        </dl>
       </header>
 
-      <ImagePlaceholder label="Case study hero image" aspectRatio="wide" />
+      <ImagePlaceholder
+        label={`${project.title} hero image`}
+        aspectRatio="wide"
+        className="mb-16"
+      />
+
+      <section className="mb-16 space-y-4">
+        <h2 className="text-2xl font-medium tracking-tight">Overview</h2>
+        {Array.isArray(project.overview) ? (
+          project.overview.map((paragraph) => (
+            <p key={paragraph} className="text-lg leading-relaxed text-muted">
+              {paragraph}
+            </p>
+          ))
+        ) : (
+          <p className="text-lg leading-relaxed text-muted">{project.overview}</p>
+        )}
+      </section>
+
+      <section className="mb-16 space-y-4">
+        <h2 className="text-2xl font-medium tracking-tight">My role</h2>
+        <ul className="list-disc space-y-3 pl-5 text-muted">
+          {project.highlights.map((highlight) => (
+            <li key={highlight} className="leading-relaxed">
+              {highlight}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {project.sections?.map((section) => (
+        <section key={section.title} className="mb-16 space-y-4">
+          <h2 className="text-2xl font-medium tracking-tight">
+            {section.title}
+          </h2>
+          {section.content &&
+            (Array.isArray(section.content) ? (
+              section.content.map((paragraph) => (
+                <p
+                  key={paragraph}
+                  className="text-lg leading-relaxed text-muted"
+                >
+                  {paragraph}
+                </p>
+              ))
+            ) : (
+              <p className="text-lg leading-relaxed text-muted">
+                {section.content}
+              </p>
+            ))}
+          {section.subsectionGroups?.map((group) => (
+            <div key={group.heading} className="space-y-4 pt-4">
+              <h3 className="text-lg font-medium tracking-tight">
+                {group.heading}
+              </h3>
+              {group.content &&
+                (Array.isArray(group.content) ? (
+                  group.content.map((paragraph) => (
+                    <p
+                      key={paragraph}
+                      className="text-lg leading-relaxed text-muted"
+                    >
+                      {paragraph}
+                    </p>
+                  ))
+                ) : (
+                  <p className="text-lg leading-relaxed text-muted">
+                    {group.content}
+                  </p>
+                ))}
+              {group.subsections.map((subsection, index) => (
+                <div key={subsection.title} className="space-y-3 pt-2">
+                  <h4 className="text-base font-medium tracking-tight">
+                    {group.numberedSubsections
+                      ? `${index + 1}. ${subsection.title}`
+                      : subsection.title}
+                  </h4>
+                  {subsection.content &&
+                    (Array.isArray(subsection.content) ? (
+                      subsection.content.map((paragraph) => (
+                        <p
+                          key={paragraph}
+                          className="text-lg leading-relaxed text-muted"
+                        >
+                          {paragraph}
+                        </p>
+                      ))
+                    ) : (
+                      <p className="text-lg leading-relaxed text-muted">
+                        {subsection.content}
+                      </p>
+                    ))}
+                </div>
+              ))}
+              {group.notes && group.notes.length > 0 && (
+                <ul className="space-y-2 border-l border-border pl-4">
+                  {group.notes.map((note) => (
+                    <li
+                      key={note}
+                      className="text-sm italic leading-relaxed text-muted"
+                    >
+                      {note}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))}
+          {!section.subsectionGroups &&
+            section.subsectionHeading &&
+            section.subsections && (
+            <h3 className="pt-2 text-lg font-medium tracking-tight">
+              {section.subsectionHeading}
+            </h3>
+          )}
+          {!section.subsectionGroups &&
+            section.subsections?.map((subsection, index) => (
+            <div key={subsection.title} className="space-y-3 pt-2">
+              {section.subsectionHeading ? (
+                <h4 className="text-base font-medium tracking-tight">
+                  {section.numberedSubsections
+                    ? `${index + 1}. ${subsection.title}`
+                    : subsection.title}
+                </h4>
+              ) : (
+                <h3 className="text-lg font-medium tracking-tight">
+                  {section.numberedSubsections
+                    ? `${index + 1}. ${subsection.title}`
+                    : subsection.title}
+                </h3>
+              )}
+              {subsection.content &&
+                (Array.isArray(subsection.content) ? (
+                  subsection.content.map((paragraph) => (
+                    <p
+                      key={paragraph}
+                      className="text-lg leading-relaxed text-muted"
+                    >
+                      {paragraph}
+                    </p>
+                  ))
+                ) : (
+                  <p className="text-lg leading-relaxed text-muted">
+                    {subsection.content}
+                  </p>
+                ))}
+              {subsection.bullets && (
+                <ul className="list-disc space-y-3 pl-5 text-muted">
+                  {subsection.bullets.map((bullet) => (
+                    <li key={bullet} className="leading-relaxed">
+                      {bullet}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))}
+          {section.images && section.images.length > 0 && (
+            <ul className="grid gap-10 pt-4 sm:grid-cols-2">
+              {section.images.map((image) => (
+                <li key={image.label} className="space-y-3">
+                  <ImagePlaceholder
+                    label={image.label}
+                    aspectRatio={image.aspectRatio ?? "video"}
+                  />
+                  {image.caption && (
+                    <p className="text-sm leading-relaxed text-muted">
+                      {image.caption}
+                    </p>
+                  )}
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+      ))}
+
+      {!project.sections?.some((section) => section.images?.length) && (
+        <ImagePlaceholder
+          label="Project screenshots or wireframes"
+          aspectRatio="video"
+          className="mb-16"
+        />
+      )}
+
+      <section className="border-t border-border pt-12">
+        <Link
+          href="/contact"
+          className="text-lg text-muted underline underline-offset-4 transition-colors hover:text-foreground"
+        >
+          Get in touch
+        </Link>
+      </section>
     </main>
   );
 }
