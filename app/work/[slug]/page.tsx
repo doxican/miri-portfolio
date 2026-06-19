@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ImagePlaceholder from "@/components/ImagePlaceholder";
+import ColourPaletteTable from "@/components/ColourPaletteTable";
+import SubsectionContent from "@/components/SubsectionContent";
 import { getProject, projects } from "@/lib/projects";
 
 type CaseStudyPageProps = {
@@ -95,13 +97,19 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
       <section className="mb-16 space-y-4">
         <h2 className="text-2xl font-medium tracking-tight">My role</h2>
-        <ul className="list-disc space-y-3 pl-5 text-muted">
-          {project.highlights.map((highlight) => (
-            <li key={highlight} className="leading-relaxed">
-              {highlight}
-            </li>
-          ))}
-        </ul>
+        {project.roleSummary ? (
+          <p className="text-lg leading-relaxed text-muted">
+            {project.roleSummary}
+          </p>
+        ) : (
+          <ul className="list-disc space-y-3 pl-5 text-muted">
+            {project.highlights.map((highlight) => (
+              <li key={highlight} className="leading-relaxed">
+                {highlight}
+              </li>
+            ))}
+          </ul>
+        )}
       </section>
 
       {project.sections?.map((section) => (
@@ -144,7 +152,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                     {group.content}
                   </p>
                 ))}
-              {group.subsections.map((subsection, index) => (
+              {group.subsections?.map((subsection, index) => (
                 <div key={subsection.title} className="space-y-3 pt-2">
                   <h4 className="text-base font-medium tracking-tight">
                     {group.numberedSubsections
@@ -167,6 +175,13 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                       </p>
                     ))}
                 </div>
+              ))}
+              {group.tables?.map((table) => (
+                <ColourPaletteTable
+                  key={table.title}
+                  title={table.title}
+                  rows={table.rows}
+                />
               ))}
               {group.notes && group.notes.length > 0 && (
                 <ul className="space-y-2 border-l border-border pl-4">
@@ -205,21 +220,22 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                     : subsection.title}
                 </h3>
               )}
-              {subsection.content &&
-                (Array.isArray(subsection.content) ? (
-                  subsection.content.map((paragraph) => (
-                    <p
-                      key={paragraph}
-                      className="text-lg leading-relaxed text-muted"
+              {subsection.notes && subsection.notes.length > 0 && (
+                <ul className="space-y-2 border-l border-border pl-4">
+                  {subsection.notes.map((note) => (
+                    <li
+                      key={note}
+                      className="text-sm italic leading-relaxed text-muted"
                     >
-                      {paragraph}
-                    </p>
-                  ))
-                ) : (
-                  <p className="text-lg leading-relaxed text-muted">
-                    {subsection.content}
-                  </p>
-                ))}
+                      {note}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <SubsectionContent
+                content={subsection.content}
+                image={subsection.image}
+              />
               {subsection.bullets && (
                 <ul className="list-disc space-y-3 pl-5 text-muted">
                   {subsection.bullets.map((bullet) => (
@@ -232,7 +248,13 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             </div>
           ))}
           {section.images && section.images.length > 0 && (
-            <ul className="grid gap-10 pt-4 sm:grid-cols-2">
+            <ul
+              className={`gap-10 pt-4 ${
+                section.imagesLayout === "stack"
+                  ? "flex flex-col gap-12"
+                  : "grid sm:grid-cols-2"
+              }`}
+            >
               {section.images.map((image) => (
                 <li key={image.label} className="space-y-3">
                   <ImagePlaceholder
@@ -240,7 +262,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                     aspectRatio={image.aspectRatio ?? "video"}
                   />
                   {image.caption && (
-                    <p className="text-sm leading-relaxed text-muted">
+                    <p className="text-base leading-relaxed text-muted">
                       {image.caption}
                     </p>
                   )}

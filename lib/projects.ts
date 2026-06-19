@@ -8,6 +8,7 @@ export type Project = {
   location: string;
   overview: string | string[];
   highlights: string[];
+  roleSummary?: string;
   sections?: {
     title: string;
     content?: string | string[];
@@ -17,18 +18,36 @@ export type Project = {
       title: string;
       content?: string | string[];
       bullets?: string[];
+      image?: {
+        label: string;
+        src?: string;
+        caption?: string;
+        aspectRatio?: "square" | "video" | "portrait" | "wide";
+        afterParagraph?: number;
+      };
+      notes?: string[];
     }[];
     subsectionGroups?: {
       heading: string;
       content?: string | string[];
       numberedSubsections?: boolean;
-      subsections: {
+      subsections?: {
         title: string;
         content?: string | string[];
         bullets?: string[];
       }[];
       notes?: string[];
+      tables?: {
+        title: string;
+        rows: {
+          token: string;
+          hex: string;
+          swatch?: string;
+          usage: string;
+        }[];
+      }[];
     }[];
+    imagesLayout?: "grid" | "stack";
     images?: {
       label: string;
       caption?: string;
@@ -75,106 +94,116 @@ export const projects: Project[] = [
     dates: "2024–2025",
     location: "Remote",
     overview: [
-      "Chainhound is a blockchain information aggregator designed to bring together data from over 100 individual blockchains into a single, accessible platform. The product serves both first-time users navigating blockchain for the first time and experienced enthusiasts looking for a reliable reference tool, all through a dashboard that simplifies the exploration of complex blockchain data.",
-      "The MVP focused on delivering a user-friendly dashboard providing immediate access to key blockchain details, with a clear growth path toward premium content and an enterprise API for business users.",
+      "Chainhound is a blockchain information aggregator that brings data from 100+ individual blockchains into a single platform. It serves two audiences: first-time users navigating blockchain for the first time, and engaged enthusiasts who need a reliable reference tool for research and comparison.",
+      "The MVP focused on delivering immediate, trustworthy access to key blockchain data — with a clear growth path toward proprietary ratings, premium content, and an enterprise API.",
     ],
-    highlights: [
-      "Lo-fi and hi-fi wireframes",
-      "Feature identification",
-      "User stories",
-      "UI design",
-      "Design system",
-    ],
+    highlights: [],
+    roleSummary:
+      "Lo-fi and hi-fi wireframes · Feature prioritisation · User stories · UI design · Design system",
     sections: [
       {
         title: "The Problem",
         content: [
-          "Blockchain information is scattered across project pages and technical whitepapers filled with jargon that most users find inaccessible. With over 1,000 active blockchains and an estimated 160 million people showing interest in blockchain technology, finding reliable, comparable information is time-consuming and often results in outdated data.",
-          "Our research found that users spend 10+ hours researching blockchain information online — with half that time spent questioning whether the information they found was even accurate. No single platform existed to centralise, compare, and validate this data for everyday users.",
+          "Blockchain information is scattered across project pages and technical whitepapers written for developers, not users. With over 1,000 active blockchains and 160 million people showing active interest in blockchain technology, finding reliable, comparable information is time-consuming and often inconclusive.",
+          "Our research found that users spend 10+ hours researching blockchain information online — with half that time spent questioning whether what they found was accurate. No single platform existed to centralise, compare, and validate this data for everyday users.",
         ],
       },
       {
-        title: "Research & Insights",
+        title: "Research",
         content:
-          "To validate the problem and define the opportunity, we conducted both top-down and bottom-up market analysis alongside desktop research and competitive analysis.",
+          "We validated the opportunity through desktop research, competitive analysis, and market sizing — looking at both who needed this and what already existed.",
         subsections: [
           {
             title: "Market opportunity",
             content:
-              "The blockchain industry is in a period of exponential growth, with an identified audience of 160 million people online showing active interest in blockchain information. In the US alone, 74,000 users search for blockchain information daily — signalling strong and consistent demand for a centralised, reliable resource.",
+              "74,000 people in the US alone search for blockchain information daily. The broader addressable audience is estimated at 160 million globally — a consistent demand signal with no purpose-built product to capture it.",
           },
           {
             title: "Competitive landscape",
-            content:
-              "Existing products in the space offer fragmented solutions — educational content, newsletters, Discord communities, and occasional deep-dives on a handful of chains. None provided a comprehensive, comparable view across blockchains at scale. This gap validated both the need for Chainhound and the opportunity to be first to market with a purpose-built aggregator.",
+            content: [
+              "The closest competitors — CoinGecko, CoinMarketCap, Blockchair — aggregate coin data, not blockchain data. The distinction matters: users researching which blockchain to build on, invest in, or trust need infrastructure-level information that coin trackers don't provide.",
+              "Niche players like DefiLlama (EVM chains only) and L2Beat (Layer 2 only) serve fragments of the space. No product covered blockchains comprehensively across layers, consensus mechanisms, and performance data — which defined Chainhound's positioning as a first-mover in blockchain-specific aggregation.",
+            ],
           },
           {
             title: "User insight",
-            content:
-              "Our target early adopter was Ezra — already engaged with blockchain but seeking a faster, more reliable way to research, compare, and evaluate chains to inform her investment decisions. Ezra represented a broader segment of users who were motivated but underserved: knowledgeable enough to know what they needed, but lacking a tool that could deliver it efficiently.",
-          },
-          {
-            title: "Key insight driving design",
-            content:
-              "Users didn't just need more information — they needed trustworthy, comparable information in one place. Every design decision for the dashboard flowed from this.",
+            content: [
+              "Our target early adopter was Ezra — already engaged with blockchain but lacking a faster, more reliable way to research and compare chains to inform her investment decisions. Knowledgeable enough to know what she needed, but without a tool that could deliver it efficiently.",
+              "The key insight driving all design decisions: users didn't need more information. They needed trustworthy, comparable information in one place.",
+            ],
+            image: {
+              label: "Ezra — user persona",
+              src: "/work/chainhound/ezra-persona.png",
+              caption:
+                "Ezra, our primary user persona — an engaged blockchain enthusiast who needs a faster, more reliable way to research and compare chains.",
+              afterParagraph: 0,
+            },
           },
         ],
       },
       {
         title: "Defining the MVP",
         content: [
-          "With a clear problem established, the challenge was deciding what to build first. The feature list covered a wide range of possibilities — from comparison tools and trend charts to blog sections and an enterprise API. Rather than building everything, I worked through a structured prioritisation exercise to define what the MVP needed to do, and what could wait.",
-          "The MVP had one job: give a user like Ezra immediate, reliable access to blockchain information across 100+ chains, with enough structure to compare and evaluate them. Everything else was phase two.",
+          "The feature list covered a wide range of possibilities — comparison tools, trend charts, a blog, an enterprise API. Rather than building everything, I worked through a structured prioritisation exercise to define what the MVP needed to do, and what could wait.",
+          "The MVP had one job: give a user like Ezra immediate, reliable access to blockchain information across 100+ chains, with enough structure to compare and evaluate them.",
         ],
         subsections: [
           {
-            title: "Core MVP features and why they made the cut",
+            title: "What made the cut",
             bullets: [
-              "Blockchain table with searchable, filterable data — The primary surface of the product. Without this working well, nothing else matters. Users needed to scan, search by name or code, and filter by data type to find what they were looking for quickly.",
-              "Individual blockchain detail pages — Once a user found a chain, they needed depth. Detail pages gave each blockchain its own structured view of all available data points.",
-              "Search and filter functionality — Critical for usability at scale. With 100+ chains in the table, an unfiltered list would be overwhelming. This was non-negotiable for the MVP.",
-              "GDPR compliance (cookies, Privacy Policy & T&Cs) — Required before any public launch, not optional.",
-              "Google Analytics — Needed from day one to understand how users were actually navigating the product.",
+              "Blockchain table with search and filter — the primary surface. Without this working well, nothing else matters. Users needed to scan, search by name or code, and filter by data type.",
+              "Individual blockchain detail pages — once a user found a chain, they needed depth. Detail pages gave each blockchain a structured view of all available data.",
+              "GDPR compliance (cookies, Privacy Policy, T&Cs) — required before any public launch.",
+              "Google Analytics — needed from day one to understand how users actually navigated the product.",
             ],
           },
           {
-            title: "What was deliberately left out of the MVP",
+            title: "What was deliberately left out",
             content:
-              "Features like blockchain comparison, trending banners, blog content, and the enterprise API were all scoped to phase two. The reasoning was simple — without first proving that users could find and trust the core data, premium features had no foundation to stand on.",
-          },
-          {
-            title: "Competitive reference",
-            content:
-              "As part of scoping the MVP, I audited existing products in the space — including DefiLlama, L2Beat, and Blockchair — mapping their features against basic user expectations and what our users would actually want. This helped validate our feature decisions and identify where Chainhound could differentiate rather than simply replicate.",
+              "Blockchain comparison, trending banners, blog content, and the enterprise API were all deferred to phase two. Without first proving users could find and trust the core data, premium features had no foundation.",
           },
         ],
       },
       {
         title: "Wireframes",
+        content:
+          "The wireframes were produced across two phases: Release 1 (the MVP) and a proposed V2 that extended the product once the core table was validated.",
+        imagesLayout: "stack",
         images: [
           {
-            label: "Wireframe 1",
-            caption: "Add a short description of this wireframe.",
+            label: "Release 1 — Landing page (top)",
+            caption:
+              "The dashboard: a searchable table of 100+ blockchains with columns for Code, Name, Layer, Consensus Mechanism, and EVM compatibility. Each row links to the blockchain's detail page. The nav is deliberately minimal — logo, Blockchains, Contact Us, search.",
           },
           {
-            label: "Wireframe 2",
-            caption: "Add a short description of this wireframe.",
+            label: "Release 1 — Landing page (bottom)",
+            caption:
+              "The lower table continues with lower-priority chains (favourited/saved rows, placeholder data). A footer provides links to Blockchains, Terms of Service, Privacy Policy, Research & Factory, and Report an Issue.",
           },
           {
-            label: "Wireframe 3",
-            caption: "Add a short description of this wireframe.",
+            label: "Release 1 — Blockchain details page",
+            caption:
+              "A two-column layout: Key Info on the left (Blockchain Name, Code, Layer, Consensus Mechanism, EVM compatibility, GitHub, Native Coin) and Project Documentation (website, whitepaper links) below it. A right-hand column shows trusted Explorers. A descriptive text panel summarises the blockchain in plain language.",
           },
           {
-            label: "Wireframe 4",
-            caption: "Add a short description of this wireframe.",
+            label: "Release 1 — Terms of Service & Privacy Policy",
+            caption:
+              "A single scrollable legal page, accessible from the footer. Required for GDPR compliance before public launch.",
           },
           {
-            label: "Wireframe 5",
-            caption: "Add a short description of this wireframe.",
+            label: "Release 1 — Contact page",
+            caption:
+              "Minimal: a short paragraph directing users to get in touch, with links to X (Twitter) and LinkedIn.",
           },
           {
-            label: "Wireframe 6",
-            caption: "Add a short description of this wireframe.",
+            label: "V2 — Enhanced landing page",
+            caption:
+              "The table gains three new proprietary columns: Security Rating, Reliability Rating, and Performance Rating — each displayed as a letter badge (A–D) colour-coded green to red. A filter toggle and favouriting system were also introduced, alongside an expanded nav including Consensus Mechanisms, Layers, Ratings, API, and News.",
+          },
+          {
+            label: "V2 — Blockchain details with metrics",
+            caption:
+              "The detail page expands significantly: live status indicators, a metrics dashboard (Blockchain Speed, Network Fees, Transactions/Events charts with adjustable time ranges), Assets/TVL, Active Addresses, Rating Justifications with explanatory links, and an Ecosystem section showing related chains.",
           },
         ],
       },
@@ -182,31 +211,51 @@ export const projects: Project[] = [
         title: "Design System & Takeaways",
         subsectionGroups: [
           {
-            heading: "Design System",
-            content: [
+            heading: "Design system",
+            content:
               "One of the core decisions early in the project was to build a design system before producing high-fidelity screens. Working on a data-heavy product with multiple surfaces — dashboard, detail pages, dark mode, and responsive breakpoints — meant that without a system, visual consistency would break down quickly.",
-              "The system was built in Figma and covered four areas:",
-            ],
-            subsections: [
+            tables: [
               {
-                title: "Components",
-                content:
-                  "All reusable UI elements were built as Figma components with documented variants. The header was designed as a base component with responsive breakpoints defined across five sizes — 2XL (1536px), XL (1280px), LG (992px), and down to mobile — with the navigation collapsing to icon-only at smaller screens. Both light and dark mode variants were built into the component, toggled via the dark mode switch.",
+                title: "Colour palette",
+                rows: [
+                  {
+                    token: "Orange",
+                    hex: "#EA7B33",
+                    swatch: "#EA7B33",
+                    usage: "Primary brand, logo, active nav state, CTA",
+                  },
+                  {
+                    token: "Gray",
+                    hex: "#4D4D4D",
+                    swatch: "#4D4D4D",
+                    usage: "Body text, secondary UI",
+                  },
+                  {
+                    token: "Rating A",
+                    hex: "Green",
+                    swatch: "#22c55e",
+                    usage: "Top-tier security, reliability, performance",
+                  },
+                  {
+                    token: "Rating B",
+                    hex: "Blue",
+                    swatch: "#3b82f6",
+                    usage: "Good — above average",
+                  },
+                  {
+                    token: "Rating C",
+                    hex: "Amber",
+                    swatch: "#f59e0b",
+                    usage: "Average — watch this chain",
+                  },
+                  {
+                    token: "Rating D",
+                    hex: "Red",
+                    swatch: "#ef4444",
+                    usage: "Below average — caution",
+                  },
+                ],
               },
-              {
-                title: "Responsive layout",
-                content:
-                  "Every component was documented with its breakpoint behaviour, ensuring the design could scale across screen sizes without bespoke decisions at each breakpoint.",
-              },
-              {
-                title: "Dark mode",
-                content:
-                  "A full dark mode variant was built in parallel with the light mode, using a consistent token structure so that switching themes required no redesign — only a colour swap.",
-              },
-            ],
-            notes: [
-              "Add colour palette — primary orange, neutrals, semantic greens for rating badges",
-              "Add typography scale — font family, size scale, weight usage",
             ],
           },
           {
