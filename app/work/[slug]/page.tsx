@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -76,11 +77,22 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         </dl>
       </header>
 
-      <ImagePlaceholder
-        label={`${project.title} hero image`}
-        aspectRatio="wide"
-        className="mb-16"
-      />
+      {project.coverImage ? (
+        <Image
+          src={project.coverImage.src}
+          alt={project.coverImage.alt}
+          width={project.coverImage.width}
+          height={project.coverImage.height}
+          className="mb-16 w-full rounded-lg border border-border"
+          priority
+        />
+      ) : (
+        <ImagePlaceholder
+          label={`${project.title} hero image`}
+          aspectRatio="wide"
+          className="mb-16"
+        />
+      )}
 
       <section className="mb-16 space-y-4">
         <h2 className="text-2xl font-medium tracking-tight">Overview</h2>
@@ -257,10 +269,20 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             >
               {section.images.map((image) => (
                 <li key={image.label} className="space-y-3">
-                  <ImagePlaceholder
-                    label={image.label}
-                    aspectRatio={image.aspectRatio ?? "video"}
-                  />
+                  {image.src ? (
+                    <Image
+                      src={image.src}
+                      alt={image.alt ?? image.label}
+                      width={image.width ?? 1024}
+                      height={image.height ?? 576}
+                      className="w-full rounded-lg border border-border"
+                    />
+                  ) : (
+                    <ImagePlaceholder
+                      label={image.label}
+                      aspectRatio={image.aspectRatio ?? "video"}
+                    />
+                  )}
                   {image.caption && (
                     <p className="text-base leading-relaxed text-muted">
                       {image.caption}

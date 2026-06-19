@@ -37,6 +37,7 @@ export default function Work() {
               title={project.title}
               subtitle={project.subtitle}
               slug={project.slug}
+              coverImage={project.coverImage}
             />
           ))}
         </ul>

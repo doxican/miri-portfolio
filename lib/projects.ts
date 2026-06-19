@@ -9,6 +9,12 @@ export type Project = {
   overview: string | string[];
   highlights: string[];
   roleSummary?: string;
+  coverImage?: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+  };
   sections?: {
     title: string;
     content?: string | string[];
@@ -51,6 +57,10 @@ export type Project = {
     images?: {
       label: string;
       caption?: string;
+      src?: string;
+      alt?: string;
+      width?: number;
+      height?: number;
       aspectRatio?: "square" | "video" | "portrait" | "wide";
     }[];
   }[];
@@ -100,6 +110,12 @@ export const projects: Project[] = [
     highlights: [],
     roleSummary:
       "Lo-fi and hi-fi wireframes · Feature prioritisation · User stories · UI design · Design system",
+    coverImage: {
+      src: "/work/chainhound/hero.png",
+      alt: "Chainhound landing page — blockchain comparison dashboard",
+      width: 1024,
+      height: 702,
+    },
     sections: [
       {
         title: "The Problem",
@@ -172,13 +188,12 @@ export const projects: Project[] = [
         images: [
           {
             label: "Release 1 — Landing page (top)",
+            src: "/work/chainhound/wireframe-landing-top.png",
+            alt: "Wireframe of the Chainhound landing page with blockchain comparison table",
+            width: 1024,
+            height: 619,
             caption:
               "The dashboard: a searchable table of 100+ blockchains with columns for Code, Name, Layer, Consensus Mechanism, and EVM compatibility. Each row links to the blockchain's detail page. The nav is deliberately minimal — logo, Blockchains, Contact Us, search.",
-          },
-          {
-            label: "Release 1 — Landing page (bottom)",
-            caption:
-              "The lower table continues with lower-priority chains (favourited/saved rows, placeholder data). A footer provides links to Blockchains, Terms of Service, Privacy Policy, Research & Factory, and Report an Issue.",
           },
           {
             label: "Release 1 — Blockchain details page",
