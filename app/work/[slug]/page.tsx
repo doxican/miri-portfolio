@@ -129,6 +129,18 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           <h2 className="text-2xl font-medium tracking-tight">
             {section.title}
           </h2>
+          {section.notes && section.notes.length > 0 && (
+            <ul className="space-y-2 border-l border-border pl-4">
+              {section.notes.map((note) => (
+                <li
+                  key={note}
+                  className="text-sm italic leading-relaxed text-muted"
+                >
+                  {note}
+                </li>
+              ))}
+            </ul>
+          )}
           {section.content &&
             (Array.isArray(section.content) ? (
               section.content.map((paragraph) => (
@@ -164,6 +176,20 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                     {group.content}
                   </p>
                 ))}
+              {group.link && (
+                <p className="text-lg leading-relaxed text-muted">
+                  See the full Figma file{" "}
+                  <a
+                    href={group.link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-foreground underline underline-offset-4 transition-colors hover:opacity-70"
+                  >
+                    {group.link.label}
+                  </a>
+                  .
+                </p>
+              )}
               {group.subsections?.map((subsection, index) => (
                 <div key={subsection.title} className="space-y-3 pt-2">
                   <h4 className="text-base font-medium tracking-tight">
@@ -188,6 +214,26 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                     ))}
                 </div>
               ))}
+              {group.images && group.images.length > 0 && (
+                <ul className="flex flex-col gap-10 pt-2">
+                  {group.images.map((image) => (
+                    <li key={image.label} className="space-y-3">
+                      <h4 className="text-base font-medium tracking-tight">
+                        {image.label}
+                      </h4>
+                      <Image
+                        src={image.src}
+                        alt={image.alt}
+                        width={image.width}
+                        height={image.height}
+                        className={`w-full rounded-lg border border-border ${
+                          image.height > image.width ? "max-w-md" : "max-w-4xl"
+                        }`}
+                      />
+                    </li>
+                  ))}
+                </ul>
+              )}
               {group.tables?.map((table) => (
                 <ColourPaletteTable
                   key={table.title}
@@ -269,6 +315,11 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             >
               {section.images.map((image) => (
                 <li key={image.label} className="space-y-3">
+                  {image.preContent && (
+                    <p className="text-lg leading-relaxed text-muted">
+                      {image.preContent}
+                    </p>
+                  )}
                   {image.src ? (
                     <Image
                       src={image.src}

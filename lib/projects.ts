@@ -18,6 +18,7 @@ export type Project = {
   sections?: {
     title: string;
     content?: string | string[];
+    notes?: string[];
     subsectionHeading?: string;
     numberedSubsections?: boolean;
     subsections?: {
@@ -52,11 +53,23 @@ export type Project = {
           usage: string;
         }[];
       }[];
+      images?: {
+        label: string;
+        src: string;
+        alt: string;
+        width: number;
+        height: number;
+      }[];
+      link?: {
+        href: string;
+        label: string;
+      };
     }[];
     imagesLayout?: "grid" | "stack";
     images?: {
       label: string;
       caption?: string;
+      preContent?: string;
       src?: string;
       alt?: string;
       width?: number;
@@ -182,8 +195,9 @@ export const projects: Project[] = [
       },
       {
         title: "Wireframes",
-        content:
-          "The wireframes were produced across two phases: Release 1 (the MVP) and a proposed V2 that extended the product once the core table was validated.",
+        notes: [
+          "Write a little introduction for this section — replace this note when ready.",
+        ],
         imagesLayout: "stack",
         images: [
           {
@@ -193,32 +207,36 @@ export const projects: Project[] = [
             width: 1024,
             height: 619,
             caption:
-              "The dashboard: a searchable table of 100+ blockchains with columns for Code, Name, Layer, Consensus Mechanism, and EVM compatibility. Each row links to the blockchain's detail page. The nav is deliberately minimal — logo, Blockchains, Contact Us, search.",
+              "The dashboard: a searchable table of 100+ blockchains with columns for Code, Name, Layer, Consensus Mechanism, and EVM compatibility. Each row links to the blockchain's detail page. The nav was kept deliberately minimal with intention to expand in future releases. This wireframe shows V2.",
           },
           {
             label: "Release 1 — Blockchain details page",
+            src: "/work/chainhound/wireframe-blockchain-details.png",
+            alt: "Wireframe of the Chainhound blockchain details page for Bitcoin",
+            width: 595,
+            height: 561,
             caption:
               "A two-column layout: Key Info on the left (Blockchain Name, Code, Layer, Consensus Mechanism, EVM compatibility, GitHub, Native Coin) and Project Documentation (website, whitepaper links) below it. A right-hand column shows trusted Explorers. A descriptive text panel summarises the blockchain in plain language.",
           },
           {
-            label: "Release 1 — Terms of Service & Privacy Policy",
-            caption:
-              "A single scrollable legal page, accessible from the footer. Required for GDPR compliance before public launch.",
-          },
-          {
-            label: "Release 1 — Contact page",
-            caption:
-              "Minimal: a short paragraph directing users to get in touch, with links to X (Twitter) and LinkedIn.",
-          },
-          {
             label: "V2 — Enhanced landing page",
+            src: "/work/chainhound/hero.png",
+            alt: "Chainhound V2 landing page hi-fi with hero section and ratings table",
+            width: 1024,
+            height: 702,
+            preContent:
+              "With the core information architecture mapped out, the team reviewed the wireframes together to align on direction and agree the future state of the product. In parallel, I used Twitter, Farcaster, and Reddit to understand what features the blockchain community cared about — what data they wanted, what was missing from existing tools, and what would make them return. Both fed into the hi-fi design decisions.",
             caption:
-              "The table gains three new proprietary columns: Security Rating, Reliability Rating, and Performance Rating — each displayed as a letter badge (A–D) colour-coded green to red. A filter toggle and favouriting system were also introduced, alongside an expanded nav including Consensus Mechanisms, Layers, Ratings, API, and News.",
+              "The landing page hi-fi introduced a condensed navigation with a dropdown for Blockchains, a hero section with a headline and clear call-to-action, and the ratings table below the fold. The goal was to lead with product value before asking users to engage with data.",
           },
           {
             label: "V2 — Blockchain details with metrics",
+            src: "/work/chainhound/wireframe-v2-blockchain-details.png",
+            alt: "Chainhound V2 blockchain details page hi-fi for Bitcoin",
+            width: 1024,
+            height: 709,
             caption:
-              "The detail page expands significantly: live status indicators, a metrics dashboard (Blockchain Speed, Network Fees, Transactions/Events charts with adjustable time ranges), Assets/TVL, Active Addresses, Rating Justifications with explanatory links, and an Ecosystem section showing related chains.",
+              "The hi-fi brings the lo-fi structure to life with formatting and the brand system applied — consistent typography, orange used for links and active states, and the layout properly spaced. The content and hierarchy stays largely the same; it's now just built to a standard ready for development.",
           },
         ],
       },
@@ -229,49 +247,26 @@ export const projects: Project[] = [
             heading: "Design system",
             content:
               "One of the core decisions early in the project was to build a design system before producing high-fidelity screens. Working on a data-heavy product with multiple surfaces — dashboard, detail pages, dark mode, and responsive breakpoints — meant that without a system, visual consistency would break down quickly.",
-            tables: [
+            images: [
               {
-                title: "Colour palette",
-                rows: [
-                  {
-                    token: "Orange",
-                    hex: "#EA7B33",
-                    swatch: "#EA7B33",
-                    usage: "Primary brand, logo, active nav state, CTA",
-                  },
-                  {
-                    token: "Gray",
-                    hex: "#4D4D4D",
-                    swatch: "#4D4D4D",
-                    usage: "Body text, secondary UI",
-                  },
-                  {
-                    token: "Rating A",
-                    hex: "Green",
-                    swatch: "#22c55e",
-                    usage: "Top-tier security, reliability, performance",
-                  },
-                  {
-                    token: "Rating B",
-                    hex: "Blue",
-                    swatch: "#3b82f6",
-                    usage: "Good — above average",
-                  },
-                  {
-                    token: "Rating C",
-                    hex: "Amber",
-                    swatch: "#f59e0b",
-                    usage: "Average — watch this chain",
-                  },
-                  {
-                    token: "Rating D",
-                    hex: "Red",
-                    swatch: "#ef4444",
-                    usage: "Below average — caution",
-                  },
-                ],
+                label: "Table rows",
+                src: "/work/chainhound/design-system-table-rows.png",
+                alt: "Chainhound design system — table row styles and rating badges",
+                width: 1024,
+                height: 536,
+              },
+              {
+                label: "Buttons",
+                src: "/work/chainhound/design-system-buttons.png",
+                alt: "Chainhound design system — button variants and states",
+                width: 952,
+                height: 1024,
               },
             ],
+            link: {
+              href: "https://www.figma.com/design/Aywnn9idx5yykKkmJN81wM/Chainhound-Website?m=auto&t=AKSCwWgcQ4KFXQfA-6",
+              label: "here",
+            },
           },
           {
             heading: "What I learned",
