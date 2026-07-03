@@ -307,10 +307,12 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           ))}
           {section.images && section.images.length > 0 && (
             <ul
-              className={`gap-10 pt-4 ${
+              className={`gap-6 pt-4 sm:gap-8 ${
                 section.imagesLayout === "stack"
                   ? "flex flex-col gap-12"
-                  : "grid sm:grid-cols-2"
+                  : section.imagesLayout === "grid-3"
+                    ? "grid items-start sm:grid-cols-3"
+                    : "grid sm:grid-cols-2"
               }`}
             >
               {section.images.map((image) => (
@@ -326,7 +328,12 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                       alt={image.alt ?? image.label}
                       width={image.width ?? 1024}
                       height={image.height ?? 576}
-                      className="w-full rounded-lg border border-border"
+                      className={`rounded-lg border border-border ${
+                        section.imagesLayout === "grid-3" ||
+                        image.aspectRatio === "portrait"
+                          ? "mx-auto h-auto w-full max-w-[355px] object-contain object-top"
+                          : "w-full"
+                      }`}
                     />
                   ) : (
                     <ImagePlaceholder

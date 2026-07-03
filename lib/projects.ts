@@ -65,7 +65,7 @@ export type Project = {
         label: string;
       };
     }[];
-    imagesLayout?: "grid" | "stack";
+    imagesLayout?: "grid" | "grid-3" | "stack";
     images?: {
       label: string;
       caption?: string;
@@ -341,6 +341,119 @@ export const projects: Project[] = [
         title: "Outcome",
         content:
           "The service reduced ambiguity at each handoff point and gave decision-makers a clear, auditable view of progression through the approval process.",
+      },
+    ],
+  },
+  {
+    slug: "medisafe",
+    title: "Medisafe (RMIT course project)",
+    subtitle: "Two-factor authentification for a healthcare account portal",
+    client: "RMIT University",
+    role: "UX/UI Designer",
+    dates: "Course project",
+    location: "Melbourne, Australia",
+    overview: [
+      "Medisafe Australia's account portal had one job for years: let members manage their health insurance online. New federal legislation changed that overnight — customer-facing platforms handling sensitive data now had to implement Two-Factor Authentication, with an eight-week window to comply.",
+      "This case study covers the design process behind that 2FA rollout: how a compliance deadline got translated into a system that's actually secure and usable, the trade-offs made to hit an 8-week window, and what testing told us we got wrong the first time.",
+    ],
+    roleSummary:
+      "Current-state audit · Design system · Wireframes and flow mapping · Hi-fi UI design · Usability testing and iteration",
+    highlights: [],
+    sections: [
+      {
+        title: "Context",
+        content:
+          "This project follows the Double Diamond — Discover, Define, Develop, Deliver — moving from a broad assessment of an existing system to a tested design solution.",
+      },
+      {
+        title: "Discover",
+        content: [
+          "New federal legislation made 2FA mandatory for any platform holding customer health data, with an eight-week deadline to comply. Walking Medisafe's existing login and account-recovery flow showed verification relying on security questions and date of birth: static and reactive by design.",
+          "Noting that Medisafe holds health data that people guard closely, I understood that the legislation sets a compliance floor — but the real question for me was how to ensure patients' trust in the platform. There are multiple ways to implement 2FA and I wanted to know which option is the most effective for this client.",
+        ],
+      },
+      {
+        title: "Define",
+        subsections: [
+          {
+            title: "Weighing the options",
+            content: [
+              "Three authentication routes were on the table — SMS one-time codes, an authenticator app, and email-based verification — and each was assessed against the same four criteria: security, cost, user familiarity, and regulatory compliance.",
+            ],
+            image: {
+              label: "2FA & MediSafe — email-based verification rationale and UI",
+              src: "/work/medisafe/email-as-2fa-hi-res.png",
+              afterParagraph: 0,
+            },
+          },
+          {
+            title: "Scoping the MVP to eight weeks",
+            content:
+              "The full wishlist of features included compliance-monitoring dashboards and deeper customer-support tooling. Both were deliberately pushed to backlog. The MVP had to do exactly two things well: get a member through mandatory 2FA with zero setup on their end, and make sure the rest of the portal — claims, plan details — stayed just as easy to reach as before.",
+          },
+        ],
+      },
+      {
+        title: "Develop",
+        subsections: [
+          {
+            title: "Design system",
+            content: [
+              "Rather than jumping straight to hi-fi screens, the project started with a small system: a blue palette (trust, calm — deliberately in the same territory as established health insurers), Manrope for typography (clean at small sizes, which matters when a lot of this UI is one-time codes and short-lived prompts), and a documented set of buttons, inputs, tiles and nav patterns before any screen was drawn.",
+              "See the full Figma file here.",
+            ],
+          },
+          {
+            title: "Mapping the full flow, not just the happy path",
+            content:
+              "The core path — landing page, login, 2FA, profile, claims — was mapped end to end before any hi-fi design, including the states that don't make it into most decks: error, empty, loading and partial/incomplete-signup states alongside the ideal flow.",
+          },
+        ],
+        imagesLayout: "stack",
+        images: [
+          {
+            label: "Full flow wireframes — ideal path, error, loading, empty, and partial states",
+            src: "/work/medisafe/wireframes-full-flow.png",
+            alt: "MediSafe wireframe flow map showing landing page, login, 2FA, profile, claims, and edge-case states",
+            width: 1024,
+            height: 823,
+          },
+        ],
+      },
+      {
+        title: "The UI solution",
+        content: [
+          "The 2FA screen itself is deliberately quiet: \"Check your email,\" a resend timer, a support link if the code doesn't show up. No new account setup is required on the user's end.",
+          "On first login post-launch, a short welcome pop-up explains what's changed and why, with an immediate Skip option for anyone who doesn't want the tour.",
+          "The dashboard keeps Account, Plan and Claims exactly where they were, with a \"See all\" pattern added to Claims so it doesn't get lost under the new security layer.",
+        ],
+        imagesLayout: "grid-3",
+        images: [
+          {
+            label: "2FA — Check your email",
+            src: "/work/medisafe/check-your-email.png",
+            alt: "MediSafe 2FA screen with email verification code entry",
+            width: 318,
+            height: 688,
+            aspectRatio: "portrait",
+          },
+          {
+            label: "Welcome pop-up",
+            src: "/work/medisafe/welcome-popup.png",
+            alt: "MediSafe welcome pop-up explaining email verification on first login",
+            width: 323,
+            height: 698,
+            aspectRatio: "portrait",
+          },
+          {
+            label: "Dashboard — See all",
+            src: "/work/medisafe/dashboard-see-all.png",
+            alt: "MediSafe dashboard with Account, Plan, and Claims see-all pattern",
+            width: 355,
+            height: 768,
+            aspectRatio: "portrait",
+          },
+        ],
       },
     ],
   },
