@@ -11,6 +11,29 @@ type CaseStudyPageProps = {
   params: Promise<{ slug: string }>;
 };
 
+function FigmaFileLink({
+  href,
+  label,
+}: {
+  href: string;
+  label: string;
+}) {
+  return (
+    <p className="text-lg leading-relaxed text-muted">
+      See the full Figma file{" "}
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-foreground underline underline-offset-4 transition-colors hover:opacity-70"
+      >
+        {label}
+      </a>
+      .
+    </p>
+  );
+}
+
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
 }
@@ -177,18 +200,10 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                   </p>
                 ))}
               {group.link && (
-                <p className="text-lg leading-relaxed text-muted">
-                  See the full Figma file{" "}
-                  <a
-                    href={group.link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-foreground underline underline-offset-4 transition-colors hover:opacity-70"
-                  >
-                    {group.link.label}
-                  </a>
-                  .
-                </p>
+                <FigmaFileLink
+                  href={group.link.href}
+                  label={group.link.label}
+                />
               )}
               {group.subsections?.map((subsection, index) => (
                 <div key={subsection.title} className="space-y-3 pt-2">
@@ -294,6 +309,12 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                 content={subsection.content}
                 image={subsection.image}
               />
+              {subsection.link && (
+                <FigmaFileLink
+                  href={subsection.link.href}
+                  label={subsection.link.label}
+                />
+              )}
               {subsection.bullets && (
                 <ul className="list-disc space-y-3 pl-5 text-muted">
                   {subsection.bullets.map((bullet) => (
@@ -359,6 +380,15 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           aspectRatio="video"
           className="mb-16"
         />
+      )}
+
+      {project.figmaLink && (
+        <section className="mb-16">
+          <FigmaFileLink
+            href={project.figmaLink.href}
+            label={project.figmaLink.label}
+          />
+        </section>
       )}
 
       <section className="border-t border-border pt-12">

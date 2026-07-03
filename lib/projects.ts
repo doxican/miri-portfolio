@@ -15,6 +15,10 @@ export type Project = {
     width: number;
     height: number;
   };
+  figmaLink?: {
+    href: string;
+    label: string;
+  };
   sections?: {
     title: string;
     content?: string | string[];
@@ -33,6 +37,10 @@ export type Project = {
         afterParagraph?: number;
       };
       notes?: string[];
+      link?: {
+        href: string;
+        label: string;
+      };
     }[];
     subsectionGroups?: {
       heading: string;
@@ -77,6 +85,11 @@ export type Project = {
       aspectRatio?: "square" | "video" | "portrait" | "wide";
     }[];
   }[];
+};
+
+const MEDISAFE_FIGMA_LINK = {
+  href: "https://www.figma.com/design/fP6a3C5JwHZBgfXbxikAgG/MediSafe-Health-Insurance?node-id=3-3&t=t4mRs2o4bHx8bqLe-1",
+  label: "here",
 };
 
 export const projects: Project[] = [
@@ -359,6 +372,13 @@ export const projects: Project[] = [
     roleSummary:
       "Current-state audit · Design system · Wireframes and flow mapping · Hi-fi UI design · Usability testing and iteration",
     highlights: [],
+    coverImage: {
+      src: "/work/medisafe/hero.png",
+      alt: "MediSafe UI screens — 2FA email verification, welcome pop-up, and dashboard",
+      width: 1113,
+      height: 768,
+    },
+    figmaLink: MEDISAFE_FIGMA_LINK,
     sections: [
       {
         title: "Context",
@@ -398,10 +418,9 @@ export const projects: Project[] = [
         subsections: [
           {
             title: "Design system",
-            content: [
+            content:
               "Rather than jumping straight to hi-fi screens, the project started with a small system: a blue palette (trust, calm — deliberately in the same territory as established health insurers), Manrope for typography (clean at small sizes, which matters when a lot of this UI is one-time codes and short-lived prompts), and a documented set of buttons, inputs, tiles and nav patterns before any screen was drawn.",
-              "See the full Figma file here.",
-            ],
+            link: MEDISAFE_FIGMA_LINK,
           },
           {
             title: "Mapping the full flow, not just the happy path",
@@ -453,6 +472,22 @@ export const projects: Project[] = [
             height: 768,
             aspectRatio: "portrait",
           },
+        ],
+      },
+      {
+        title: "Deliver",
+        content: [
+          "Development followed Agile, scoped as four two-week sprints across the eight-week deadline — compliant core first, support and monitoring tooling held as backlog. The delivery was structured to be agile to ensure development could stay adaptable within a tight deadline, rather than locking in one static build from week one.",
+          "For version two, features like a resend timer and support button on the 2FA code screen, a reorganised claims dashboard, and AI live chat with a screen-reader option were suggested as post-launch improvements to build on the MVP.",
+          "Alongside this, the release was paired with a go-to-market plan (email campaign, portal updates, phased pre-launch/launch/post-launch) — part of the assessment, but not the focus of this case study.",
+        ],
+      },
+      {
+        title: "Reflection",
+        content: [
+          "For me, 2FA wasn't something to keep reassessing — it's the standard now, and I treated it as a given rather than a question to debate. What I was really solving for was implementation within the context of this specific client: an existing, trusted product where I couldn't afford to change the UI too much, and where customers needed careful onboarding so the new step didn't land as a surprise or a frustration.",
+          "Starting with lo-fi wireframes was the right call to get going — it let me get the structure and flow down without getting attached to details too early. Once I had the design system in place, moving into mid-fi and hi-fi was easy; the groundwork meant I wasn't making the same decisions twice.",
+          "What I'd do differently: I'd want to run user testing to actually see the flow play out in real life and get real feedback, rather than relying on my own assumptions about where it would land well or badly.",
         ],
       },
     ],
