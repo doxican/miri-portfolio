@@ -90,10 +90,12 @@ const notableProjects = [
 ];
 
 const certificates = [
-  { name: "Certificate name", issuer: "Issuing organization" },
-  { name: "Certificate name", issuer: "Issuing organization" },
-  { name: "Certificate name", issuer: "Issuing organization" },
-  { name: "Certificate name", issuer: "Issuing organization" },
+  {
+    name: "Graduate Diploma in Digital Product Design",
+    issuer: "RMIT",
+    logoSrc: "/logos/rmit.svg",
+    logoAlt: "RMIT University logo",
+  },
 ];
 
 export default function About() {
