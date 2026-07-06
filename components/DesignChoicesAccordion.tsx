@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import CaseStudyImageCarousel from "@/components/CaseStudyImageCarousel";
 import ImagePlaceholder from "@/components/ImagePlaceholder";
 
 export type DesignChoiceItem = {
@@ -15,6 +16,14 @@ export type DesignChoiceItem = {
     height?: number;
     aspectRatio?: "square" | "video" | "portrait" | "wide";
   };
+  images?: {
+    label: string;
+    src?: string;
+    alt?: string;
+    width?: number;
+    height?: number;
+    aspectRatio?: "square" | "video" | "portrait" | "wide";
+  }[];
 };
 
 type DesignChoicesAccordionProps = {
@@ -102,7 +111,9 @@ export default function DesignChoicesAccordion({
                   {getAccordionBody(item)}
                 </p>
 
-                {item.image?.src ? (
+                {item.images && item.images.length > 0 ? (
+                  <CaseStudyImageCarousel images={item.images} />
+                ) : item.image?.src ? (
                   <Image
                     src={item.image.src}
                     alt={item.image.alt ?? item.image.label}

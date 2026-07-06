@@ -23,6 +23,11 @@ export type Project = {
     title: string;
     content?: string | string[];
     bullets?: string[];
+    link?: {
+      href: string;
+      label: string;
+      lead?: string;
+    };
     notes?: string[];
     subsectionHeading?: string;
     numberedSubsections?: boolean;
@@ -91,6 +96,14 @@ export type Project = {
         height?: number;
         aspectRatio?: "square" | "video" | "portrait" | "wide";
       };
+      images?: {
+        label: string;
+        src?: string;
+        alt?: string;
+        width?: number;
+        height?: number;
+        aspectRatio?: "square" | "video" | "portrait" | "wide";
+      }[];
     }[];
     images?: {
       label: string;
@@ -362,13 +375,17 @@ export const projects: Project[] = [
     location: "Australia",
     overview: [
       "When Victorian government schools want to fund their own building works — new courts, a library extension, asbestos removal — they need approval from their regional office and the Victorian School Building Authority. Until redesign and digitalisation, that process lived on paper.",
-      "I redesigned it as a role-based digital service: three connected portal views (school, region, VSBA), a guided three-step application, and a notification system covering every decision point in the approval lifecycle. The default application page ended up shorter, catering for different scenarios while asking every question the policy requires.",
+      "I redesigned this process as a role-based digital service with three connected portal views (school, region, VSBA), a guided three-step application, and a notification system covering every decision point in the approval lifecycle. The default application page ended up shorter, catering for different scenarios while asking every question the policy requires.",
     ],
-    highlights: [
-      "Designed an end-to-end approval workflow across assessment, review, and sign-off stages.",
-      "Reduced ambiguity at each handoff point in the approval process.",
-      "Gave decision-makers a clear, auditable view of progression through internal requests.",
-    ],
+    roleSummary:
+      "Policy-to-requirements translation · Process and service mapping · Lo-fi wireframes across three portal views · Feature prioritisation and developer handoff · Stakeholder management and negotiation of timelines, production and expectations",
+    highlights: [],
+    coverImage: {
+      src: "/work/education-approval-workflow/hero.png",
+      alt: "VSBA School Capital Projects assessments dashboard with summary cards and application queue",
+      width: 1024,
+      height: 524,
+    },
     sections: [
       {
         title: "The task",
@@ -401,54 +418,129 @@ export const projects: Project[] = [
               "A school principal filling in a form once every few years, a regional manager working through multiple at the time, and a VSBA teams reviewing accountability to policy — all looking at the same application.",
           },
         ],
-        imagesHeading: "Design choices",
+      },
+      {
+        title: "Design choices",
         imagesLayout: "accordion",
         imagesItems: [
           {
             title: "Structured layout",
             content:
               "Digitising meant rebuilding the question set as a three-step wizard, and reorganising its longest step into six titled, shaded sections. Yes/No questions collapsed into single compact rows; nine project-scope categories became a two-column checkbox grid.",
-            image: {
-              label: "Structured layout",
-              aspectRatio: "video",
-            },
+            images: [
+              {
+                label: "New application — Step 1 of 3",
+                src: "/work/education-approval-workflow/structured-layout-step-1.png",
+                alt: "New application form step one with school details, contact details, and proposal type",
+                width: 717,
+                height: 878,
+              },
+              {
+                label: "Specify project proposal — two-column checkbox grid",
+                src: "/work/education-approval-workflow/structured-layout-proposal-type.png",
+                alt: "Project proposal selection with accordions and nine project-scope categories in a two-column grid",
+                width: 1024,
+                height: 756,
+              },
+            ],
           },
           {
             title: "Progressive disclosure",
             content:
               "The core of the form was still long, but these fields were non-negotiable. I created accordions, collapsing sections to slim header bars for better visibility of the form. Additionally, conditional or follow-up questions appear anchored to the selection that triggered them, streamlining the form for each specific project type.",
-            image: {
-              label: "Progressive disclosure",
-              aspectRatio: "video",
-            },
+            images: [
+              {
+                label: "Demolition — conditional follow-up questions",
+                src: "/work/education-approval-workflow/progressive-disclosure-demolition.png",
+                alt: "Project proposal form showing demolition selected with anchored additional questions below",
+                width: 832,
+                height: 752,
+              },
+            ],
           },
           {
-            title: "Designing the moments around the form",
+            title: "The dashboard",
             content:
-              "Government forms fail at the edges, so I included: a before-you-begin checklist (time estimate, documents to gather, a prompt to talk to your regional contact first — the single best predictor of a smooth approval), a first-use empty state that teaches users what the journey looks like, and a submission confirmation with a reference number and honest timelines drawn from policy — 2–4 weeks for regional review, 2–8 for VSBA assessment — which was discussed and agreed with colleagues.",
-            image: {
-              label: "Designing the moments around the form",
-              aspectRatio: "video",
-            },
+              "The dashboards became the heart of the portal. Schools see every application they've ever made — draft, submitted, returned, under review, approved — with status badges and contextual actions: continue a draft, review and amend a returned application, view a decision. Regional and VSBA staff get queue views built for working, not just viewing: summary cards (to review, awaiting school amendment, with VSBA, decided) and multi-school tables sorted by what needs attention first, with SLA reminders when something sits too long. Reporting for decision-makers made easy.",
+            images: [
+              {
+                label: "School portal — My Applications",
+                src: "/work/education-approval-workflow/dashboard-school.png",
+                alt: "School dashboard showing My Applications with status badges and contextual actions",
+                width: 1024,
+                height: 642,
+              },
+              {
+                label: "Regional portal — Region Applications",
+                src: "/work/education-approval-workflow/dashboard-region.png",
+                alt: "Regional dashboard with summary cards and applications queue for North-Western Victoria",
+                width: 1024,
+                height: 641,
+              },
+              {
+                label: "VSBA portal — Assessments",
+                src: "/work/education-approval-workflow/dashboard-vsba.png",
+                alt: "VSBA assessments dashboard with summary cards and multi-region application table",
+                width: 1024,
+                height: 643,
+              },
+            ],
           },
           {
+            title: "Approval process",
             content:
-              "The system-level work I'm proudest of. I followed a single application across every role in the process. A school submits. Their regional manager reviews it and endorses it — adding a comment that travels with the application. The VSBA assessor opens it and sees that regional comment in context, assesses against policy compliance, and either recommends approval or returns it with numbered feedback. That exact feedback is what the school sees in their amendment form, point by point, with a response due date. The executive director approves with conditions, confirming their financial delegation. Letters, notifications, and status updates fire automatically to everyone.",
-            image: {
-              label: "One application, three desks",
-              aspectRatio: "video",
-            },
+              "I followed a single application across every role in the process. A school submits. Their regional manager reviews it and endorses it — adding a comment that travels with the application. The VSBA assessor opens it and sees that regional comment in context, assesses against policy compliance, and either recommends approval or returns it with numbered feedback. That exact feedback is what the school sees in their amendment form, point by point, with a response due date. The executive director approves with conditions, confirming their financial delegation. Letters, notifications, and status updates fire automatically to everyone.",
+            images: [
+              {
+                label: "School — application status and timeline",
+                src: "/work/education-approval-workflow/approval-process-school.png",
+                alt: "School view of Springfield PS application with status timeline and supporting documents",
+                width: 970,
+                height: 692,
+              },
+              {
+                label: "Regional — review and endorsement",
+                src: "/work/education-approval-workflow/approval-process-region.png",
+                alt: "Regional review screen with endorsement checklist and feedback to school",
+                width: 1024,
+                height: 685,
+              },
+              {
+                label: "VSBA — assessment and recommendation",
+                src: "/work/education-approval-workflow/approval-process-vsba.png",
+                alt: "VSBA assessment screen with policy compliance checklist and executive recommendation",
+                width: 1024,
+                height: 811,
+              },
+            ],
           },
           {
             title: 'A notification for every "what\'s happening?"',
             content:
               'I mapped seven lifecycle triggers — submitted, endorsed, returned for amendment, feedback received, approved, not approved, draft reminder — and designed the channel pair for each: an in-portal notification centre with unread states, and email templates for the moments that matter. Every role got its own version, including SLA reminders for regional and VSBA staff ("this application has been in your queue 10 business days").',
-            image: {
-              label: 'A notification for every "what\'s happening?"',
-              aspectRatio: "video",
-            },
+            images: [
+              {
+                label: "In-portal notification centre",
+                src: "/work/education-approval-workflow/notification-centre.png",
+                alt: "Notifications panel with unread states for submitted, returned, and feedback events",
+                width: 422,
+                height: 708,
+              },
+              {
+                label: "Application submitted — what happens next",
+                src: "/work/education-approval-workflow/notification-submitted.png",
+                alt: "Submission confirmation with reference number and three-step what happens next timeline",
+                width: 918,
+                height: 574,
+              },
+            ],
           },
         ],
+        link: {
+          lead: "See the full Figma designs",
+          href: "https://www.figma.com/design/GMDI4lzqqaIUIrDB441lqg/VSBA-School-Capital-Project-%E2%80%94-Wireframes?node-id=0-1&t=s6vipMEnhsaiQOdF-1",
+          label: "here",
+        },
       },
       {
         title: "Outcome",
@@ -463,7 +555,24 @@ export const projects: Project[] = [
       {
         title: "What I'd do next",
         content:
-          "Sprint 2 was already scoped when I finished: autosave with a visible \"saved\" indicator, section completion states for returning drafters, and withdraw/delete for user control. Beyond that: a full WCAG audit of the accordion and error patterns, and post-launch measurement — completion rates, time-to-submit, and the metric I care most about: how many applications get returned for amendment, and whether better upfront guidance drives it down.",
+          "The roadmap was already written when I finished — as a feature list. I maintained a tracker of every feature in the design (42 by the end), each prioritised P0/P1/P2, sized for effort, and triaged by build type: what SharePoint gives us natively, what developers could configure, and what needs custom development. That prioritisation set the sprint plan: launch on the P0 core, then Sprint 2 for other priorities.",
+        link: {
+          lead: "See the full list",
+          href: "https://www.figma.com/design/GMDI4lzqqaIUIrDB441lqg/VSBA-School-Capital-Project-%E2%80%94-Wireframes?node-id=42-2",
+          label: "here",
+        },
+        imagesLayout: "stack",
+        images: [
+          {
+            label: "VSBA School Portal — Feature Tracker",
+            src: "/work/education-approval-workflow/feature-tracker.png",
+            alt: "Feature tracker spreadsheet with P0, P1, and P2 priorities for portal features",
+            width: 1024,
+            height: 453,
+            caption:
+              "Note: The provided wireframes are my personal design and are not a 1/1 copy of the SharePoint copy used by Department of Education.",
+          },
+        ],
       },
     ],
   },

@@ -17,13 +17,15 @@ type CaseStudyPageProps = {
 function FigmaFileLink({
   href,
   label,
+  lead = "See the full Figma file",
 }: {
   href: string;
   label: string;
+  lead?: string;
 }) {
   return (
     <p className="text-lg leading-relaxed text-muted">
-      See the full Figma file{" "}
+      {lead}{" "}
       <a
         href={href}
         target="_blank"
@@ -235,6 +237,13 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                 {section.content}
               </p>
             ))}
+          {section.link && section.imagesLayout !== "accordion" && (
+            <FigmaFileLink
+              href={section.link.href}
+              label={section.link.label}
+              lead={section.link.lead}
+            />
+          )}
           {section.bullets && (
             <ul className="list-disc space-y-3 pl-5 text-muted">
               {section.bullets.map((bullet) => (
@@ -335,15 +344,20 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               )}
             </div>
           ))}
-          {!section.subsectionGroups &&
-            section.subsectionHeading &&
-            section.subsections && (
-            <h3 className="pt-2 text-lg font-medium tracking-tight">
-              {section.subsectionHeading}
-            </h3>
-          )}
-          {!section.subsectionGroups &&
-            section.subsections?.map((subsection, index) => (
+          {!section.subsectionGroups && section.subsections && (
+            <div
+              className={
+                section.subsectionHeading
+                  ? "border-l border-border pl-4 sm:pl-5"
+                  : undefined
+              }
+            >
+              {section.subsectionHeading && (
+                <h3 className="pt-2 text-lg font-medium tracking-tight">
+                  {section.subsectionHeading}
+                </h3>
+              )}
+              {section.subsections.map((subsection, index) => (
             <div key={subsection.title} className="space-y-3 pt-2">
               {section.subsectionHeading && section.numberedSubsections ? (
                 <p className="text-lg leading-relaxed text-muted">
@@ -405,13 +419,24 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               )}
             </div>
           ))}
+            </div>
+          )}
           {section.imagesHeading && (
             <h3 className="pt-6 text-lg font-medium tracking-tight">
               {section.imagesHeading}
             </h3>
           )}
           {section.imagesLayout === "accordion" && section.imagesItems ? (
-            <DesignChoicesAccordion items={section.imagesItems} />
+            <>
+              <DesignChoicesAccordion items={section.imagesItems} />
+              {section.link && (
+                <FigmaFileLink
+                  href={section.link.href}
+                  label={section.link.label}
+                  lead={section.link.lead}
+                />
+              )}
+            </>
           ) : (
             section.imagesItems?.map((item, index) => {
               const paragraphs = Array.isArray(item.content)
