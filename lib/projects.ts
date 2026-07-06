@@ -22,6 +22,7 @@ export type Project = {
   sections?: {
     title: string;
     content?: string | string[];
+    bullets?: string[];
     notes?: string[];
     subsectionHeading?: string;
     numberedSubsections?: boolean;
@@ -41,6 +42,10 @@ export type Project = {
         href: string;
         label: string;
       };
+      inlineLinks?: {
+        text: string;
+        href: string;
+      }[];
     }[];
     subsectionGroups?: {
       heading: string;
@@ -73,7 +78,20 @@ export type Project = {
         label: string;
       };
     }[];
-    imagesLayout?: "grid" | "grid-3" | "stack";
+    imagesLayout?: "grid" | "grid-3" | "stack" | "carousel" | "accordion";
+    imagesHeading?: string;
+    imagesItems?: {
+      title?: string;
+      content: string | string[];
+      image?: {
+        label: string;
+        src?: string;
+        alt?: string;
+        width?: number;
+        height?: number;
+        aspectRatio?: "square" | "video" | "portrait" | "wide";
+      };
+    }[];
     images?: {
       label: string;
       caption?: string;
@@ -336,14 +354,16 @@ export const projects: Project[] = [
   },
   {
     slug: "education-approval-workflow",
-    title: "Approval Workflow Application",
+    title: "From paper trail to approval pipeline",
     subtitle: "End-to-end workflow design for internal requests",
     client: "Department of Education",
     role: "Manager, Policy",
     dates: "2020–2022",
     location: "Australia",
-    overview:
-      "Designed an end-to-end approval workflow application facilitating assessment, review, and sign-off stages for internal requests.",
+    overview: [
+      "When Victorian government schools want to fund their own building works — new courts, a library extension, asbestos removal — they need approval from their regional office and the Victorian School Building Authority. Until redesign and digitalisation, that process lived on paper.",
+      "I redesigned it as a role-based digital service: three connected portal views (school, region, VSBA), a guided three-step application, and a notification system covering every decision point in the approval lifecycle. The default application page ended up shorter, catering for different scenarios while asking every question the policy requires.",
+    ],
     highlights: [
       "Designed an end-to-end approval workflow across assessment, review, and sign-off stages.",
       "Reduced ambiguity at each handoff point in the approval process.",
@@ -351,9 +371,99 @@ export const projects: Project[] = [
     ],
     sections: [
       {
+        title: "The task",
+        content: [
+          "The application wasn't really a form — it was a policy document with blanks in it. On paper, every school received every question: pages of maintenance evidence, funding declarations, and long conditional blocks for project types that had nothing to do with their project, with no way to know what could be skipped.",
+          "My task was to turn this paper-based, policy-heavy, three-party approval process into a digital service that feels simple — without dropping any single requirement, and building it in SharePoint.",
+        ],
+        subsectionHeading: "Constraints",
+        numberedSubsections: true,
+        subsections: [
+          {
+            title: "The policy was the requirements document.",
+            content:
+              "The School-funded Capital Projects policy dictates what must be asked, what must be attached, who must approve what, and in what order. Nothing could be cut for simplicity — school council declarations, maintenance evidence, funding-source disclosures all had to stay. The design lever wasn't less but better-structured content.",
+            inlineLinks: [
+              {
+                text: "School-funded Capital Projects policy",
+                href: "https://www2.education.vic.gov.au/pal/school-funded-capital-projects/policy",
+              },
+            ],
+          },
+          {
+            title: "It had to be built in-house on SharePoint.",
+            content:
+              "I had to maximise SharePoint's native features and use developers time/effort on carefully prioritised features.",
+          },
+          {
+            title: "Three very different users but one source of truth.",
+            content:
+              "A school principal filling in a form once every few years, a regional manager working through multiple at the time, and a VSBA teams reviewing accountability to policy — all looking at the same application.",
+          },
+        ],
+        imagesHeading: "Design choices",
+        imagesLayout: "accordion",
+        imagesItems: [
+          {
+            title: "Structured layout",
+            content:
+              "Digitising meant rebuilding the question set as a three-step wizard, and reorganising its longest step into six titled, shaded sections. Yes/No questions collapsed into single compact rows; nine project-scope categories became a two-column checkbox grid.",
+            image: {
+              label: "Structured layout",
+              aspectRatio: "video",
+            },
+          },
+          {
+            title: "Progressive disclosure",
+            content:
+              "The core of the form was still long, but these fields were non-negotiable. I created accordions, collapsing sections to slim header bars for better visibility of the form. Additionally, conditional or follow-up questions appear anchored to the selection that triggered them, streamlining the form for each specific project type.",
+            image: {
+              label: "Progressive disclosure",
+              aspectRatio: "video",
+            },
+          },
+          {
+            title: "Designing the moments around the form",
+            content:
+              "Government forms fail at the edges, so I included: a before-you-begin checklist (time estimate, documents to gather, a prompt to talk to your regional contact first — the single best predictor of a smooth approval), a first-use empty state that teaches users what the journey looks like, and a submission confirmation with a reference number and honest timelines drawn from policy — 2–4 weeks for regional review, 2–8 for VSBA assessment — which was discussed and agreed with colleagues.",
+            image: {
+              label: "Designing the moments around the form",
+              aspectRatio: "video",
+            },
+          },
+          {
+            content:
+              "The system-level work I'm proudest of. I followed a single application across every role in the process. A school submits. Their regional manager reviews it and endorses it — adding a comment that travels with the application. The VSBA assessor opens it and sees that regional comment in context, assesses against policy compliance, and either recommends approval or returns it with numbered feedback. That exact feedback is what the school sees in their amendment form, point by point, with a response due date. The executive director approves with conditions, confirming their financial delegation. Letters, notifications, and status updates fire automatically to everyone.",
+            image: {
+              label: "One application, three desks",
+              aspectRatio: "video",
+            },
+          },
+          {
+            title: 'A notification for every "what\'s happening?"',
+            content:
+              'I mapped seven lifecycle triggers — submitted, endorsed, returned for amendment, feedback received, approved, not approved, draft reminder — and designed the channel pair for each: an in-portal notification centre with unread states, and email templates for the moments that matter. Every role got its own version, including SLA reminders for regional and VSBA staff ("this application has been in your queue 10 business days").',
+            image: {
+              label: 'A notification for every "what\'s happening?"',
+              aspectRatio: "video",
+            },
+          },
+        ],
+      },
+      {
         title: "Outcome",
+        bullets: [
+          "One continuous digital pipeline replacing a paper-era form and email-based handoffs — three role-based portals sharing one source of truth",
+          "Default application page reduced to ~a third of its original length with zero questions removed",
+          "Conditional questions cut from every user's path unless relevant to them",
+          "Every approval-lifecycle event covered by a notification — no more status phone calls",
+          "A 42-feature handoff tracker that let developers build with prioritisation",
+        ],
+      },
+      {
+        title: "What I'd do next",
         content:
-          "The service reduced ambiguity at each handoff point and gave decision-makers a clear, auditable view of progression through the approval process.",
+          "Sprint 2 was already scoped when I finished: autosave with a visible \"saved\" indicator, section completion states for returning drafters, and withdraw/delete for user control. Beyond that: a full WCAG audit of the accordion and error patterns, and post-launch measurement — completion rates, time-to-submit, and the metric I care most about: how many applications get returned for amendment, and whether better upfront guidance drives it down.",
       },
     ],
   },

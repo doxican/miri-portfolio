@@ -1,10 +1,13 @@
 import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
+import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import ImagePlaceholder from "@/components/ImagePlaceholder";
 import ColourPaletteTable from "@/components/ColourPaletteTable";
 import SubsectionContent from "@/components/SubsectionContent";
+import CaseStudyImageCarousel from "@/components/CaseStudyImageCarousel";
+import DesignChoicesAccordion from "@/components/DesignChoicesAccordion";
 import { getProject, projects } from "@/lib/projects";
 
 type CaseStudyPageProps = {
@@ -32,6 +35,59 @@ function FigmaFileLink({
       .
     </p>
   );
+}
+
+function renderTextWithLinks(
+  text: string,
+  links?: { text: string; href: string }[],
+) {
+  if (!links?.length) {
+    return text;
+  }
+
+  let parts: Array<string | ReactNode> = [text];
+
+  for (const link of links) {
+    const nextParts: Array<string | ReactNode> = [];
+
+    for (const part of parts) {
+      if (typeof part !== "string") {
+        nextParts.push(part);
+        continue;
+      }
+
+      const index = part.indexOf(link.text);
+      if (index === -1) {
+        nextParts.push(part);
+        continue;
+      }
+
+      if (index > 0) {
+        nextParts.push(part.slice(0, index));
+      }
+
+      nextParts.push(
+        <a
+          key={`${link.href}-${index}`}
+          href={link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-foreground underline underline-offset-4 transition-colors hover:opacity-70"
+        >
+          {link.text}
+        </a>,
+      );
+
+      const rest = part.slice(index + link.text.length);
+      if (rest) {
+        nextParts.push(rest);
+      }
+    }
+
+    parts = nextParts;
+  }
+
+  return parts;
 }
 
 export function generateStaticParams() {
@@ -179,6 +235,15 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                 {section.content}
               </p>
             ))}
+          {section.bullets && (
+            <ul className="list-disc space-y-3 pl-5 text-muted">
+              {section.bullets.map((bullet) => (
+                <li key={bullet} className="text-lg leading-relaxed">
+                  {bullet}
+                </li>
+              ))}
+            </ul>
+          )}
           {section.subsectionGroups?.map((group) => (
             <div key={group.heading} className="space-y-4 pt-4">
               <h3 className="text-lg font-medium tracking-tight">
@@ -280,35 +345,49 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           {!section.subsectionGroups &&
             section.subsections?.map((subsection, index) => (
             <div key={subsection.title} className="space-y-3 pt-2">
-              {section.subsectionHeading ? (
-                <h4 className="text-base font-medium tracking-tight">
-                  {section.numberedSubsections
-                    ? `${index + 1}. ${subsection.title}`
-                    : subsection.title}
-                </h4>
+              {section.subsectionHeading && section.numberedSubsections ? (
+                <p className="text-lg leading-relaxed text-muted">
+                  {index + 1}. {subsection.title}{" "}
+                  {renderTextWithLinks(
+                    Array.isArray(subsection.content)
+                      ? subsection.content.join(" ")
+                      : (subsection.content ?? ""),
+                    subsection.inlineLinks,
+                  )}
+                </p>
               ) : (
-                <h3 className="text-lg font-medium tracking-tight">
-                  {section.numberedSubsections
-                    ? `${index + 1}. ${subsection.title}`
-                    : subsection.title}
-                </h3>
+                <>
+                  {section.subsectionHeading ? (
+                    <h4 className="text-base font-medium tracking-tight">
+                      {section.numberedSubsections
+                        ? `${index + 1}. ${subsection.title}`
+                        : subsection.title}
+                    </h4>
+                  ) : (
+                    <h3 className="text-lg font-medium tracking-tight">
+                      {section.numberedSubsections
+                        ? `${index + 1}. ${subsection.title}`
+                        : subsection.title}
+                    </h3>
+                  )}
+                  {subsection.notes && subsection.notes.length > 0 && (
+                    <ul className="space-y-2 border-l border-border pl-4">
+                      {subsection.notes.map((note) => (
+                        <li
+                          key={note}
+                          className="text-sm italic leading-relaxed text-muted"
+                        >
+                          {note}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  <SubsectionContent
+                    content={subsection.content}
+                    image={subsection.image}
+                  />
+                </>
               )}
-              {subsection.notes && subsection.notes.length > 0 && (
-                <ul className="space-y-2 border-l border-border pl-4">
-                  {subsection.notes.map((note) => (
-                    <li
-                      key={note}
-                      className="text-sm italic leading-relaxed text-muted"
-                    >
-                      {note}
-                    </li>
-                  ))}
-                </ul>
-              )}
-              <SubsectionContent
-                content={subsection.content}
-                image={subsection.image}
-              />
               {subsection.link && (
                 <FigmaFileLink
                   href={subsection.link.href}
@@ -326,7 +405,51 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               )}
             </div>
           ))}
-          {section.images && section.images.length > 0 && (
+          {section.imagesHeading && (
+            <h3 className="pt-6 text-lg font-medium tracking-tight">
+              {section.imagesHeading}
+            </h3>
+          )}
+          {section.imagesLayout === "accordion" && section.imagesItems ? (
+            <DesignChoicesAccordion items={section.imagesItems} />
+          ) : (
+            section.imagesItems?.map((item, index) => {
+              const paragraphs = Array.isArray(item.content)
+                ? item.content
+                : [item.content];
+              const singleParagraph = paragraphs.length === 1;
+
+              return (
+                <div
+                  key={item.title ?? `images-item-${index}`}
+                  className="space-y-3 pt-2"
+                >
+                  <p className="text-lg leading-relaxed text-muted">
+                    {index + 1} ·{" "}
+                    {item.title
+                      ? `${item.title}${singleParagraph ? ` ${paragraphs[0]}` : ""}`
+                      : paragraphs.join(" ")}
+                  </p>
+                  {item.title &&
+                    !singleParagraph &&
+                    paragraphs.map((paragraph) => (
+                      <p
+                        key={paragraph}
+                        className="text-lg leading-relaxed text-muted"
+                      >
+                        {paragraph}
+                      </p>
+                    ))}
+                </div>
+              );
+            })
+          )}
+          {section.imagesLayout !== "accordion" &&
+            section.images &&
+            section.images.length > 0 && (
+            section.imagesLayout === "carousel" ? (
+              <CaseStudyImageCarousel images={section.images} />
+            ) : (
             <ul
               className={`gap-6 pt-4 sm:gap-8 ${
                 section.imagesLayout === "stack"
@@ -370,6 +493,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                 </li>
               ))}
             </ul>
+            )
           )}
         </section>
       ))}
