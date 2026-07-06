@@ -511,7 +511,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                     />
                   )}
                   {image.caption && (
-                    <p className="text-base leading-relaxed text-muted">
+                    <p className="mt-6 text-base leading-relaxed text-muted">
                       {image.caption}
                     </p>
                   )}

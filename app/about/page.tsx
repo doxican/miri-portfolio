@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import CertificateCard from "@/components/CertificateCard";
 import EmploymentEntry from "@/components/EmploymentEntry";
-import ImagePlaceholder from "@/components/ImagePlaceholder";
 import NotableProjectEntry from "@/components/NotableProjectEntry";
 
 export const metadata: Metadata = {
@@ -99,12 +99,13 @@ const certificates = [
 export default function About() {
   return (
     <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-16 sm:py-20">
-      <section className="mb-20 grid gap-12 md:grid-cols-[1fr_280px] md:items-start">
-        <header className="max-w-3xl space-y-6">
-          <h1 className="text-4xl font-medium tracking-tight sm:text-5xl">
-            I&apos;m Miri
-          </h1>
-          <div className="space-y-4 text-lg leading-relaxed text-muted">
+      <section className="mb-20 space-y-6">
+        <h1 className="max-w-3xl text-4xl font-medium tracking-tight sm:text-5xl">
+          I&apos;m Miri
+        </h1>
+
+        <div className="grid gap-12 md:grid-cols-[1fr_280px] md:items-start">
+          <div className="max-w-3xl space-y-4 text-lg leading-relaxed text-muted">
             <p>
               I&apos;m a product and service designer with a background in public
               policy and government services. I design digital experiences that
@@ -127,12 +128,16 @@ export default function About() {
               lives.
             </p>
           </div>
-        </header>
 
-        <ImagePlaceholder
-          label="Profile photo placeholder"
-          aspectRatio="square"
-        />
+          <Image
+            src="/about/profile.jpg"
+            alt="Portrait of Miri smiling, wearing a blue denim shirt"
+            width={708}
+            height={1024}
+            className="h-auto w-full max-w-[280px] rounded-lg border border-border"
+            priority
+          />
+        </div>
       </section>
 
       <section aria-labelledby="experience-heading">
