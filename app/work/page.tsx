@@ -31,15 +31,17 @@ export default function Work() {
         </h2>
 
         <ul className="grid gap-12 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-16">
-          {projects.map((project) => (
-            <WorkProjectCard
-              key={project.slug}
-              title={project.title}
-              subtitle={project.subtitle}
-              slug={project.slug}
-              coverImage={project.coverImage}
-            />
-          ))}
+          {projects
+            .filter((project) => project.slug !== "education-asset-management")
+            .map((project) => (
+              <WorkProjectCard
+                key={project.slug}
+                title={project.title}
+                subtitle={project.subtitle}
+                slug={project.slug}
+                coverImage={project.coverImage}
+              />
+            ))}
         </ul>
       </section>
 
