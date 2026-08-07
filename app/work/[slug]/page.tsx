@@ -523,7 +523,13 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         </section>
       ))}
 
-      {!project.sections?.some((section) => section.images?.length) && (
+      {!project.sections?.some(
+        (section) =>
+          section.images?.length ||
+          section.imagesItems?.length ||
+          section.subsections?.some((subsection) => subsection.image) ||
+          section.subsectionGroups?.some((group) => group.images?.length),
+      ) && (
         <ImagePlaceholder
           label="Project screenshots or wireframes"
           aspectRatio="video"

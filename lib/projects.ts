@@ -125,6 +125,109 @@ const MEDISAFE_FIGMA_LINK = {
 
 export const projects: Project[] = [
   {
+    slug: "the-core",
+    title: "The Core",
+    subtitle: "Website design for a wellness platform",
+    client: "Vita Sidorkina, certified fitness trainer",
+    role: "UX/UI Designer — layout, wireframes, and design implementation",
+    dates: "2026",
+    location: "Remote",
+    overview: [
+      "The Core is a wellness platform by Vita Sidorkina, built around three pillars — workouts, nutrition, and mindset — for women who want fitness that fits into real life, not around it. Vita came to me with a clear brief: she needed a website that could introduce her method, give members a login to access their content, and host on-demand videos behind a paid subscription.",
+      "I designed the layout and user experience to meet that brief — translating the requirements into a site structure, a set of wireframes, and the final page design.",
+    ],
+    highlights: [
+      "UX & information architecture — structuring the site around the three content pillars, the login area, and the trial funnel",
+      "Wireframes — mapping every page and flow in Figma before moving to final design",
+      "Layout & page design — turning the wireframes into the finished, launch-ready website",
+    ],
+    coverImage: {
+      src: "/work/the-core/hero.png",
+      alt: "The Core website hero — Come back to Your Core with 7-day free trial CTA",
+      width: 2880,
+      height: 1720,
+    },
+    sections: [
+      {
+        title: "The brief",
+        content: "Vita's requirements were specific:",
+        bullets: [
+          "A website that introduces Vita, her method, and the three content pillars (workouts, nutrition, mindset) to first-time visitors",
+          "A login/account system so paying members can access their content",
+          "On-demand video content — workouts, recipes, and mindset sessions — gated behind a paid subscription",
+          "A clear path from first visit to free trial sign-up, since none of the actual content can be shown before someone commits",
+        ],
+        subsections: [
+          {
+            title: "Target user",
+            content:
+              "Women who are tired of extreme, all-or-nothing fitness culture and want something realistic and sustainable — workouts they'll actually repeat, recipes they'll actually cook, support they can return to.",
+          },
+        ],
+      },
+      {
+        title: "Process",
+        imagesLayout: "accordion",
+        imagesItems: [
+          {
+            title: "1. Structuring the content",
+            content:
+              "The Core's offering breaks into three pillars — Workouts, Nutrition, Mindset — plus a live community layer. I used wireframes to work out how to introduce all three to a first-time visitor without overwhelming them, landing on a layout that gives each pillar its own section and short description while still reading as one cohesive system by the time visitors reach the sign-up.",
+            image: {
+              label: "Homepage structure / pillar sections",
+              src: "/work/the-core/pillars-section.png",
+              alt: "The Core homepage pillars — Workouts, Nutrition, and Mindset sections",
+              width: 2880,
+              height: 1300,
+              aspectRatio: "wide",
+            },
+          },
+          {
+            title: "2. Designing around the login and paywall",
+            content:
+              'Since every piece of content — videos, recipes, mindset sessions — sits behind a member login, the site itself had to do the convincing before anyone could see what they were signing up for. I wireframed the layout around a "preview, then commit" logic: the homepage sells the method and the feeling (through Vita\'s story, the three pillars, and community proof) rather than the content itself, then routes every path toward the login/trial sign-up as the one next step.',
+            image: {
+              label: "Login / sign-up / trial flow",
+              src: "/work/the-core/login-trial-flow.png",
+              alt: "The Core app section with trial CTA, login and sign up, plus tablet and phone mockups",
+              width: 2880,
+              height: 1200,
+              aspectRatio: "wide",
+            },
+          },
+          {
+            title: "3. From wireframes to final layout",
+            content:
+              "Once the structure and flows held up, I moved into final page design — applying layout, spacing, and type hierarchy so the site felt calm and unhurried rather than like a typical high-pressure fitness sales page.",
+            image: {
+              label: "Final homepage layout",
+              src: "/work/the-core/final-layout.png",
+              alt: "The Core final website layout — full homepage from hero through footer",
+              width: 2880,
+              height: 8772,
+              aspectRatio: "portrait",
+            },
+          },
+        ],
+      },
+      {
+        title: "Outcome",
+        content:
+          "The Core launched at jointhecore.co with a full website, member login, and trial sign-up flow, built around Vita's requirements. The site is live today, running her 7-day free trial funnel into a paid membership with on-demand video content.",
+        link: {
+          lead: "Visit the live site",
+          href: "https://www.jointhecore.co/",
+          label: "jointhecore.co",
+        },
+      },
+      {
+        title: "What's next",
+        content:
+          "The website was phase one. I'm now designing The Core's companion mobile app — extending the same content structure (workouts, nutrition, mindset) into a native, on-the-go experience.",
+      },
+    ],
+  },
+  {
     slug: "hounslow-govservice",
     title: "London Borough of Hounslow",
     subtitle: "Service design for a government consultation platform",
