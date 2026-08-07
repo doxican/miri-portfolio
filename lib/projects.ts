@@ -31,6 +31,7 @@ export type Project = {
     notes?: string[];
     subsectionHeading?: string;
     numberedSubsections?: boolean;
+    collapsibleSubsections?: boolean;
     subsections?: {
       title: string;
       content?: string | string[];
@@ -271,10 +272,10 @@ export const projects: Project[] = [
     roleSummary:
       "Lo-fi and hi-fi wireframes · Feature prioritisation · User stories · UI design · Design system",
     coverImage: {
-      src: "/work/chainhound/hero.png",
-      alt: "Chainhound landing page — blockchain comparison dashboard",
-      width: 1024,
-      height: 702,
+      src: "/work/chainhound/cover.png",
+      alt: "Chainhound landing page — Find the right blockchain for your next project",
+      width: 2936,
+      height: 1652,
     },
     sections: [
       {
@@ -288,6 +289,7 @@ export const projects: Project[] = [
         title: "Research",
         content:
           "We validated the opportunity through desktop research, competitive analysis, and market sizing — looking at both who needed this and what already existed.",
+        collapsibleSubsections: true,
         subsections: [
           {
             title: "Market opportunity",
@@ -323,6 +325,7 @@ export const projects: Project[] = [
           "The feature list covered a wide range of possibilities — comparison tools, trend charts, a blog, an enterprise API. Rather than building everything, I worked through a structured prioritisation exercise to define what the MVP needed to do, and what could wait.",
           "The MVP had one job: give a user like Ezra immediate, reliable access to blockchain information across 100+ chains, with enough structure to compare and evaluate them.",
         ],
+        collapsibleSubsections: true,
         subsections: [
           {
             title: "What made the cut",

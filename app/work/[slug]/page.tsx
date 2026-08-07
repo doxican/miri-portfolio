@@ -8,6 +8,7 @@ import ColourPaletteTable from "@/components/ColourPaletteTable";
 import SubsectionContent from "@/components/SubsectionContent";
 import CaseStudyImageCarousel from "@/components/CaseStudyImageCarousel";
 import DesignChoicesAccordion from "@/components/DesignChoicesAccordion";
+import CaseStudySubsectionsAccordion from "@/components/CaseStudySubsectionsAccordion";
 import { getProject, projects } from "@/lib/projects";
 
 type CaseStudyPageProps = {
@@ -345,6 +346,12 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             </div>
           ))}
           {!section.subsectionGroups && section.subsections && (
+            section.collapsibleSubsections ? (
+              <CaseStudySubsectionsAccordion
+                items={section.subsections}
+                numbered={section.numberedSubsections}
+              />
+            ) : (
             <div
               className={
                 section.subsectionHeading
@@ -420,6 +427,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             </div>
           ))}
             </div>
+            )
           )}
           {section.imagesHeading && (
             <h3 className="pt-6 text-lg font-medium tracking-tight">
