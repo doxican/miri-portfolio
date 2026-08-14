@@ -126,6 +126,118 @@ const MEDISAFE_FIGMA_LINK = {
 
 export const projects: Project[] = [
   {
+    slug: "pilates-by-bryony",
+    title: "Pilates by Bryony",
+    subtitle: "App & website UI/UX study",
+    client: "Self-initiated practice project",
+    role: "UI/UX Designer",
+    dates: "2024–2025",
+    location: "Remote",
+    overview: [
+      "A self-initiated UI/UX practice project designed to simulate the brief a real fitness subscription platform might bring to a product designer. Working from the existing Pilates by Bryony brand, I designed a complete iOS app and desktop website — from first touchpoint to paying subscriber — to develop my skills across complex content systems, subscription flows, and cross-surface design.",
+    ],
+    roleSummary:
+      "UI/UX Designer (practice project) · Figma · 15 iOS screens · full desktop homepage · 13 documented interaction patterns",
+    highlights: [],
+    coverImage: {
+      src: "/work/pilates-by-bryony/hero.png",
+      alt: "Pilates by Bryony — hero image with studio photography",
+      width: 1024,
+      height: 665,
+    },
+    sections: [
+      {
+        title: "The design challenge",
+        content: [
+          "Fitness creators with large content libraries face a specific problem: how do you make hundreds of videos feel organised and accessible rather than overwhelming? And how do you convert a casual visitor into a committed subscriber before they leave?",
+          "The challenge was to design a platform that felt as intuitive as Netflix, as premium as the brand, and as persuasive as a well-crafted sales page — across both mobile and desktop.",
+        ],
+      },
+      {
+        title: "Scope of work",
+        bullets: [
+          "15 iOS app screens covering the full user journey: welcome, plan selection, App Store payment flow, account creation, home, search, library, settings, video detail, collection detail, and overlay interactions",
+          "Full desktop homepage from hero to footer",
+          "Interaction notes documenting 13 distinct UI patterns for a realistic design handoff",
+        ],
+      },
+      {
+        title: "Key design areas",
+        imagesLayout: "accordion",
+        imagesItems: [
+          {
+            title: "Subscription and onboarding",
+            content:
+              "The welcome screen presents two clear paths — start a free trial or explore content — reducing the decision to its simplest form. The plan selection and App Store payment screens were designed to minimise friction at the highest drop-off moment. Account creation includes a newsletter consent checkbox with a red error state for incomplete submission.",
+            image: {
+              label:
+                "Wireframe — welcome screen, plan selection, App Store payment, and account creation flow",
+              aspectRatio: "portrait",
+            },
+          },
+          {
+            title: "Content discovery",
+            content:
+              "The home screen organises a library of 600+ classes into scannable horizontal rows — by duration, body type, equipment, challenge, instructor, nutrition, and series. A hero banner with page dots surfaces featured and new content. The search screen adds a filter pill for users who know what they want.",
+            image: {
+              label:
+                "Wireframe — home screen with category rows, hero banner, and search with filter pill",
+              aspectRatio: "portrait",
+            },
+          },
+          {
+            title: "Collection and episode detail",
+            content:
+              "Each collection has its own detail page with a hero image, description, episode list, and a seasons picker for multi-week programmes like the six-week Summer Plan. Users can save content to My List or download for offline viewing.",
+            image: {
+              label:
+                "Wireframe — collection detail with hero, episode list, seasons picker, and My List actions",
+              aspectRatio: "portrait",
+            },
+          },
+          {
+            title: "Error and empty states",
+            content:
+              "The account creation error state — flagging the missing newsletter consent — and the empty Library state were both designed to guide users forward rather than leave them stuck.",
+            image: {
+              label:
+                "Wireframe — account creation error state and empty Library state",
+              aspectRatio: "portrait",
+            },
+          },
+          {
+            title: "Interaction design",
+            content:
+              "Thirteen interaction patterns were documented including swipeable carousels, bottom sheet modals, dim overlays, segmented controls, sort popovers with pointer tails, password toggle, and dismissible banners — as a designer would prepare for development handoff.",
+            image: {
+              label:
+                "Wireframe — interaction pattern annotations (carousels, bottom sheets, overlays, popovers)",
+              aspectRatio: "portrait",
+            },
+          },
+          {
+            title: "Website homepage",
+            content:
+              "The desktop site leads with a full-bleed hero video and a single CTA: a 7-day free trial. The membership section uses an editorial tile layout to communicate content breadth. The testimonials section anchors trust with survey data — 96%, 98%, and 100% satisfaction metrics — before a challenges carousel and Instagram grid reinforce community and consistency.",
+            image: {
+              label:
+                "Wireframe — desktop homepage from hero video and trial CTA through testimonials and footer",
+              aspectRatio: "wide",
+            },
+          },
+        ],
+      },
+      {
+        title: "Takeaways",
+        bullets: [
+          "Content-heavy platforms need information architecture decisions made before any visual design begins — the category structure on the home screen shaped every other screen that followed.",
+          "Subscription conversion lives or dies at the payment moment. Every word, every button, every piece of reassurance copy on the plan selection and App Store screens was a deliberate friction-reduction decision.",
+          "Designing error and empty states exposed gaps in the happy-path thinking. They were not an afterthought — they were where the real UX work happened.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "the-core",
     title: "The Core",
     subtitle: "Website design for a wellness platform",
