@@ -199,8 +199,12 @@ export const projects: Project[] = [
               "Each collection has its own detail page with a hero image, description, episode list, and a seasons picker for multi-week programmes like the six-week Summer Plan. Users can save content to My List or download for offline viewing.",
             image: {
               label:
-                "Wireframe — collection detail with hero, episode list, seasons picker, and My List actions",
-              aspectRatio: "portrait",
+                "Collection detail with hero, episode list, and subscribe CTA",
+              src: "/work/pilates-by-bryony/collection-detail.png",
+              alt: "Pilates by Bryony desktop collection page — Learn the Foundations episode grid on a laptop mockup",
+              width: 2400,
+              height: 1800,
+              aspectRatio: "wide",
             },
           },
           {
@@ -209,8 +213,12 @@ export const projects: Project[] = [
               "The account creation error state — flagging the missing newsletter consent — and the empty Library state were both designed to guide users forward rather than leave them stuck.",
             image: {
               label:
-                "Wireframe — account creation error state and empty Library state",
-              aspectRatio: "portrait",
+                "Account creation error state and empty Library state",
+              src: "/work/pilates-by-bryony/error-empty-states.png",
+              alt: "Pilates by Bryony iOS mockups — create account error state and empty Library",
+              width: 1366,
+              height: 768,
+              aspectRatio: "wide",
             },
           },
           {
@@ -229,8 +237,12 @@ export const projects: Project[] = [
               "The desktop site leads with a full-bleed hero video and a single CTA: a 7-day free trial. The membership section uses an editorial tile layout to communicate content breadth. The testimonials section anchors trust with survey data — 96%, 98%, and 100% satisfaction metrics — before a challenges carousel and Instagram grid reinforce community and consistency.",
             image: {
               label:
-                "Wireframe — desktop homepage from hero video and trial CTA through testimonials and footer",
-              aspectRatio: "wide",
+                "Desktop homepage from hero through testimonials and footer",
+              src: "/work/pilates-by-bryony/website-homepage.png",
+              alt: "Pilates by Bryony desktop homepage layout — hero, membership tiles, challenges, testimonials, and footer",
+              width: 2880,
+              height: 11170,
+              aspectRatio: "portrait",
             },
           },
         ],
