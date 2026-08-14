@@ -171,8 +171,12 @@ export const projects: Project[] = [
               "The welcome screen presents two clear paths — start a free trial or explore content — reducing the decision to its simplest form. The plan selection and App Store payment screens were designed to minimise friction at the highest drop-off moment. Account creation includes a newsletter consent checkbox with a red error state for incomplete submission.",
             image: {
               label:
-                "Wireframe — welcome screen, plan selection, App Store payment, and account creation flow",
-              aspectRatio: "portrait",
+                "Welcome screen, plan selection, App Store payment, and account creation flow",
+              src: "/work/pilates-by-bryony/onboarding-mockup.png",
+              alt: "Pilates by Bryony iOS mockups — welcome, plan selection, and App Store payment flow",
+              width: 1366,
+              height: 768,
+              aspectRatio: "wide",
             },
           },
           {
@@ -181,8 +185,12 @@ export const projects: Project[] = [
               "The home screen organises a library of 600+ classes into scannable horizontal rows — by duration, body type, equipment, challenge, instructor, nutrition, and series. A hero banner with page dots surfaces featured and new content. The search screen adds a filter pill for users who know what they want.",
             image: {
               label:
-                "Wireframe — home screen with category rows, hero banner, and search with filter pill",
-              aspectRatio: "portrait",
+                "Home screen with category rows, hero banner, and search with filter pill",
+              src: "/work/pilates-by-bryony/content-discovery.png",
+              alt: "Pilates by Bryony iOS mockups — home dashboard and search screens",
+              width: 1366,
+              height: 768,
+              aspectRatio: "wide",
             },
           },
           {
