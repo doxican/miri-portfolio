@@ -428,9 +428,9 @@ export const projects: Project[] = [
       "Lo-fi and hi-fi wireframes · Feature prioritisation · User stories · UI design · Design system",
     coverImage: {
       src: "/work/chainhound/cover.png",
-      alt: "Chainhound landing page — Find the right blockchain for your next project",
-      width: 2936,
-      height: 1652,
+      alt: "Chainhound landing page on a laptop mockup — Find the right blockchain for your next project",
+      width: 2400,
+      height: 1800,
     },
     sections: [
       {
