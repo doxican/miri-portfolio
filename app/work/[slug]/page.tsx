@@ -305,6 +305,9 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                 </div>
               ))}
               {group.images && group.images.length > 0 && (
+                group.imagesLayout === "carousel" ? (
+                  <CaseStudyImageCarousel images={group.images} />
+                ) : (
                 <ul className="flex flex-col gap-10 pt-2">
                   {group.images.map((image) => (
                     <li key={image.label} className="space-y-3">
@@ -323,6 +326,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                     </li>
                   ))}
                 </ul>
+                )
               )}
               {group.tables?.map((table) => (
                 <ColourPaletteTable
@@ -528,6 +532,22 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             </ul>
             )
           )}
+          {section.carouselLead && (
+            <p className="text-lg leading-relaxed text-muted">
+              {section.carouselLead}
+            </p>
+          )}
+          {section.carouselImages && section.carouselImages.length > 0 && (
+            <CaseStudyImageCarousel images={section.carouselImages} />
+          )}
+          {section.extraGalleries?.map((gallery) => (
+            <div key={gallery.heading} className="space-y-4 pt-4">
+              <h3 className="text-lg font-medium tracking-tight">
+                {gallery.heading}
+              </h3>
+              <CaseStudyImageCarousel images={gallery.images} />
+            </div>
+          ))}
         </section>
       ))}
 

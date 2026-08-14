@@ -79,6 +79,7 @@ export type Project = {
         width: number;
         height: number;
       }[];
+      imagesLayout?: "stack" | "carousel";
       link?: {
         href: string;
         label: string;
@@ -115,6 +116,28 @@ export type Project = {
       width?: number;
       height?: number;
       aspectRatio?: "square" | "video" | "portrait" | "wide";
+    }[];
+    carouselLead?: string;
+    carouselImages?: {
+      label: string;
+      caption?: string;
+      src?: string;
+      alt?: string;
+      width?: number;
+      height?: number;
+      aspectRatio?: "square" | "video" | "portrait" | "wide";
+    }[];
+    extraGalleries?: {
+      heading: string;
+      images: {
+        label: string;
+        caption?: string;
+        src?: string;
+        alt?: string;
+        width?: number;
+        height?: number;
+        aspectRatio?: "square" | "video" | "portrait" | "wide";
+      }[];
     }[];
   }[];
 };
@@ -477,37 +500,34 @@ export const projects: Project[] = [
       },
       {
         title: "Wireframes",
-        notes: [
-          "Write a little introduction for this section — replace this note when ready.",
-        ],
-        imagesLayout: "stack",
+        content:
+          "The first-release wireframes mapped the core product: a dashboard with a searchable table of 100+ blockchains (Code, Name, Layer, Consensus Mechanism, EVM compatibility, and letter-grade ratings for Security, Reliability, and Performance); a details page with Key Info, a plain-language description, and trusted explorers; and a Terms of Service page for launch. Navigation was kept deliberately minimal, with intention to expand in later releases.",
+        imagesLayout: "carousel",
         images: [
           {
-            label: "Release 1 — Landing page (top)",
-            src: "/work/chainhound/wireframe-landing-top.png",
-            alt: "Wireframe of the Chainhound landing page with blockchain comparison table",
-            width: 1024,
-            height: 619,
-            caption:
-              "The dashboard: a searchable table of 100+ blockchains with columns for Code, Name, Layer, Consensus Mechanism, and EVM compatibility. Each row links to the blockchain's detail page. The nav was kept deliberately minimal with intention to expand in future releases. This wireframe shows V2.",
+            label: "Release 1 wireframes",
+            src: "/work/chainhound/wireframes-release-1.png",
+            alt: "Chainhound Release 1 wireframes — landing page, blockchain details, and terms of service",
+            width: 1920,
+            height: 1080,
           },
           {
-            label: "Release 1 — Blockchain details page",
-            src: "/work/chainhound/wireframe-blockchain-details.png",
-            alt: "Wireframe of the Chainhound blockchain details page for Bitcoin",
-            width: 595,
-            height: 561,
-            caption:
-              "A two-column layout: Key Info on the left (Blockchain Name, Code, Layer, Consensus Mechanism, EVM compatibility, GitHub, Native Coin) and Project Documentation (website, whitepaper links) below it. A right-hand column shows trusted Explorers. A descriptive text panel summarises the blockchain in plain language.",
+            label: "Dashboard and blockchain details wireframes",
+            src: "/work/chainhound/wireframes-dashboard-details.png",
+            alt: "Chainhound wireframes — dashboard comparison table and Bitcoin details page",
+            width: 1920,
+            height: 1080,
           },
+        ],
+        carouselLead:
+          "With the core information architecture mapped out, the team reviewed the wireframes together to align on direction and agree the future state of the product. In parallel, I used Twitter, Farcaster, and Reddit to understand what features the blockchain community cared about — what data they wanted, what was missing from existing tools, and what would make them return. Both fed into the hi-fi design decisions.",
+        carouselImages: [
           {
             label: "V2 — Enhanced landing page",
             src: "/work/chainhound/hero.png",
             alt: "Chainhound V2 landing page hi-fi with hero section and ratings table",
             width: 1024,
             height: 702,
-            preContent:
-              "With the core information architecture mapped out, the team reviewed the wireframes together to align on direction and agree the future state of the product. In parallel, I used Twitter, Farcaster, and Reddit to understand what features the blockchain community cared about — what data they wanted, what was missing from existing tools, and what would make them return. Both fed into the hi-fi design decisions.",
             caption:
               "The landing page hi-fi introduced a condensed navigation with a dropdown for Blockchains, a hero section with a headline and clear call-to-action, and the ratings table below the fold. The goal was to lead with product value before asking users to engage with data.",
           },
@@ -520,6 +540,36 @@ export const projects: Project[] = [
             caption:
               "The hi-fi brings the lo-fi structure to life with formatting and the brand system applied — consistent typography, orange used for links and active states, and the layout properly spaced. The content and hierarchy stays largely the same; it's now just built to a standard ready for development.",
           },
+          {
+            label: "V2 — Contact Us",
+            src: "/work/chainhound/wireframe-v2-contact.png",
+            alt: "Chainhound V2 Contact Us page with contact form and beta community signup",
+            width: 2880,
+            height: 1890,
+            caption:
+              "The Contact page split the ask into two paths: a structured enquiry form on the left, and a Beta community signup on the right for people who wanted early access rather than a one-off message. Social links sat below so the page also served as a lightweight presence beyond the product itself.",
+          },
+        ],
+        extraGalleries: [
+          {
+            heading: "V2 — The hero",
+            images: [
+              {
+                label: "Hero mockup",
+                src: "/work/chainhound/v2-hero-mockup.png",
+                alt: "Chainhound V2 landing page on a laptop mockup",
+                width: 2400,
+                height: 1800,
+              },
+              {
+                label: "Full landing page",
+                src: "/work/chainhound/v2-hero-page.png",
+                alt: "Chainhound V2 full landing page from hero through footer",
+                width: 1600,
+                height: 2962,
+              },
+            ],
+          },
         ],
       },
       {
@@ -529,6 +579,7 @@ export const projects: Project[] = [
             heading: "Design system",
             content:
               "One of the core decisions early in the project was to build a design system before producing high-fidelity screens. Working on a data-heavy product with multiple surfaces — dashboard, detail pages, dark mode, and responsive breakpoints — meant that without a system, visual consistency would break down quickly.",
+            imagesLayout: "carousel",
             images: [
               {
                 label: "Table rows",
@@ -540,9 +591,16 @@ export const projects: Project[] = [
               {
                 label: "Buttons",
                 src: "/work/chainhound/design-system-buttons.png",
-                alt: "Chainhound design system — button variants and states",
-                width: 952,
+                alt: "Chainhound design system — primary, secondary, ghost, and outline button variants",
+                width: 799,
                 height: 1024,
+              },
+              {
+                label: "Colour palette",
+                src: "/work/chainhound/design-system-colour-palette.png",
+                alt: "Chainhound design system — brand, neutrals, and rating colour palette",
+                width: 1024,
+                height: 391,
               },
             ],
             link: {

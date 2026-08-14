@@ -80,8 +80,8 @@ export default function CaseStudyImageCarousel({
 
   return (
     <div className="space-y-4 pt-4">
-      {current.preContent && (
-        <p className="text-lg leading-relaxed text-muted">{current.preContent}</p>
+      {current.caption && current.label && (
+        <h3 className="text-lg font-medium tracking-tight">{current.label}</h3>
       )}
 
       <div className="relative">
