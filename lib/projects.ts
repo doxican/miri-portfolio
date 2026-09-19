@@ -149,6 +149,53 @@ const MEDISAFE_FIGMA_LINK = {
 
 export const projects: Project[] = [
   {
+    slug: "zola-bekker",
+    title: "Zola Bekker",
+    subtitle: "Portfolio website for an award-winning director",
+    client: "Zola Bekker",
+    role: "UX/UI Designer & Developer",
+    dates: "2026",
+    location: "Remote",
+    overview:
+      "A bold, single-page portfolio site for award-winning director Zola Bekker — designed and built end to end, from Figma to a live Next.js site.",
+    highlights: [
+      "Designed a bold split-screen visual identity across hero, about, showreel, gallery, and contact sections",
+      "Built and shipped a responsive Next.js site with custom brand typography and section-specific colour systems",
+      "Delivered desktop, tablet, and mobile layouts from design through production deployment",
+    ],
+    coverImage: {
+      src: "/work/zola-bekker/cover.png",
+      alt: "Zola Bekker website hero — split-screen portrait with CONTACT CTA on a laptop mockup",
+      width: 1024,
+      height: 654,
+    },
+    sections: [
+      {
+        title: "Overview",
+        content:
+          "Zola Bekker needed a personal site that matched her voice: sharp, confident, and comedy-forward. I designed and built a single-page portfolio — hero, about, showreel, mid-image break, work-with-me, gallery, and films — then shipped it live.",
+        link: {
+          lead: "Visit the live site",
+          href: "https://zola-bekker-website.vercel.app/",
+          label: "here",
+        },
+        imagesLayout: "stack",
+        images: [
+          {
+            label: "Desktop, iPad, and iPhone layouts",
+            src: "/work/zola-bekker/responsive-layouts.png",
+            alt: "Zola Bekker website — Desktop, iPad, and iPhone responsive layouts in Figma",
+            width: 999,
+            height: 636,
+            aspectRatio: "wide",
+            caption:
+              "The wireframes were designed to be fully responsive from the start, with dedicated layouts for desktop, iPad, and iPhone. Each breakpoint keeps the bold split-screen identity intact while adapting hierarchy, spacing, and image framing for that screen size.",
+          },
+        ],
+      },
+    ],
+  },
+  {
     slug: "pilates-by-bryony",
     title: "Pilates by Bryony",
     subtitle: "App & website UI/UX study",
