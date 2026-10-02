@@ -13,6 +13,7 @@ export type CarouselImage = {
   width?: number;
   height?: number;
   aspectRatio?: "square" | "video" | "portrait" | "wide";
+  naturalSize?: boolean;
 };
 
 type CaseStudyImageCarouselProps = {
@@ -86,7 +87,11 @@ export default function CaseStudyImageCarousel({
 
       <div className="relative">
         <div
-          className="overflow-hidden rounded-lg border border-border"
+          className={
+            current.naturalSize
+              ? "mx-auto w-fit max-w-full overflow-hidden rounded-lg border border-border"
+              : "overflow-hidden rounded-lg border border-border"
+          }
           aria-live="polite"
         >
           {current.src ? (
@@ -95,7 +100,17 @@ export default function CaseStudyImageCarousel({
               alt={current.alt ?? current.label}
               width={current.width ?? 1024}
               height={current.height ?? 576}
-              className="h-auto min-h-[28rem] w-full object-contain sm:min-h-[32rem]"
+              unoptimized={current.naturalSize}
+              style={
+                current.naturalSize
+                  ? { width: current.width, maxWidth: "100%", height: "auto" }
+                  : undefined
+              }
+              className={
+                current.naturalSize
+                  ? "h-auto w-auto max-w-full"
+                  : "h-auto min-h-[28rem] w-full object-contain sm:min-h-[32rem]"
+              }
             />
           ) : (
             <ImagePlaceholder

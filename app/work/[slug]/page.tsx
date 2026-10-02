@@ -165,6 +165,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           alt={project.coverImage.alt}
           width={project.coverImage.width}
           height={project.coverImage.height}
+          unoptimized={project.coverImage.unoptimized}
           className="mb-16 w-full rounded-lg border border-border"
           priority
         />

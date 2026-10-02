@@ -11,6 +11,12 @@ type WorkProjectCardProps = {
     alt: string;
     width: number;
     height: number;
+    thumbnail?: {
+      src: string;
+      alt?: string;
+      width: number;
+      height: number;
+    };
   };
 };
 
@@ -28,10 +34,11 @@ export default function WorkProjectCard({
       >
         {coverImage ? (
           <Image
-            src={coverImage.src}
-            alt={coverImage.alt}
-            width={coverImage.width}
-            height={coverImage.height}
+            src={coverImage.thumbnail?.src ?? coverImage.src}
+            alt={coverImage.thumbnail?.alt ?? coverImage.alt}
+            width={coverImage.thumbnail?.width ?? coverImage.width}
+            height={coverImage.thumbnail?.height ?? coverImage.height}
+            unoptimized={Boolean(coverImage.thumbnail)}
             className="aspect-video w-full rounded-lg border border-border object-cover object-top"
           />
         ) : (

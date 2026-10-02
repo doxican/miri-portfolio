@@ -14,6 +14,13 @@ export type Project = {
     alt: string;
     width: number;
     height: number;
+    unoptimized?: boolean;
+    thumbnail?: {
+      src: string;
+      alt?: string;
+      width: number;
+      height: number;
+    };
   };
   figmaLink?: {
     href: string;
@@ -105,6 +112,7 @@ export type Project = {
         width?: number;
         height?: number;
         aspectRatio?: "square" | "video" | "portrait" | "wide";
+        naturalSize?: boolean;
       }[];
     }[];
     images?: {
@@ -724,10 +732,17 @@ export const projects: Project[] = [
       "Policy-to-requirements translation · Process and service mapping · Lo-fi wireframes across three portal views · Feature prioritisation and developer handoff · Stakeholder management and negotiation of timelines, production and expectations",
     highlights: [],
     coverImage: {
-      src: "/work/education-approval-workflow/hero.png",
-      alt: "VSBA School Capital Projects assessments dashboard with summary cards and application queue",
-      width: 1024,
-      height: 524,
+      src: "/work/education-approval-workflow/cover-photo-2.png",
+      alt: "Executive approval screen for Springfield PS Outdoor Courts Upgrade",
+      width: 2880,
+      height: 2184,
+      unoptimized: true,
+      thumbnail: {
+        src: "/work/education-approval-workflow/thumbnail-ribbon.png",
+        alt: "Laptop mockup of the executive approval screen for a school capital project",
+        width: 2400,
+        height: 1350,
+      },
     },
     sections: [
       {
@@ -775,8 +790,8 @@ export const projects: Project[] = [
                 label: "New application — Step 1 of 3",
                 src: "/work/education-approval-workflow/structured-layout-step-1.png",
                 alt: "New application form step one with school details, contact details, and proposal type",
-                width: 717,
-                height: 878,
+                width: 4320,
+                height: 5262,
               },
               {
                 label: "Specify project proposal — two-column checkbox grid",
@@ -796,8 +811,8 @@ export const projects: Project[] = [
                 label: "Demolition — conditional follow-up questions",
                 src: "/work/education-approval-workflow/progressive-disclosure-demolition.png",
                 alt: "Project proposal form showing demolition selected with anchored additional questions below",
-                width: 832,
-                height: 752,
+                width: 3478,
+                height: 3034,
               },
             ],
           },
@@ -809,23 +824,23 @@ export const projects: Project[] = [
               {
                 label: "School portal — My Applications",
                 src: "/work/education-approval-workflow/dashboard-school.png",
-                alt: "School dashboard showing My Applications with status badges and contextual actions",
-                width: 1024,
-                height: 642,
+                alt: "School dashboard showing My Applications, with the notifications panel open",
+                width: 4320,
+                height: 4650,
               },
               {
                 label: "Regional portal — Region Applications",
                 src: "/work/education-approval-workflow/dashboard-region.png",
                 alt: "Regional dashboard with summary cards and applications queue for North-Western Victoria",
-                width: 1024,
-                height: 641,
+                width: 4320,
+                height: 2712,
               },
               {
                 label: "VSBA portal — Assessments",
                 src: "/work/education-approval-workflow/dashboard-vsba.png",
                 alt: "VSBA assessments dashboard with summary cards and multi-region application table",
-                width: 1024,
-                height: 643,
+                width: 2880,
+                height: 1808,
               },
             ],
           },
@@ -835,25 +850,25 @@ export const projects: Project[] = [
               "I followed a single application across every role in the process. A school submits. Their regional manager reviews it and endorses it — adding a comment that travels with the application. The VSBA assessor opens it and sees that regional comment in context, assesses against policy compliance, and either recommends approval or returns it with numbered feedback. That exact feedback is what the school sees in their amendment form, point by point, with a response due date. The executive director approves with conditions, confirming their financial delegation. Letters, notifications, and status updates fire automatically to everyone.",
             images: [
               {
-                label: "School — application status and timeline",
+                label: "School — application detail (approved)",
                 src: "/work/education-approval-workflow/approval-process-school.png",
-                alt: "School view of Springfield PS application with status timeline and supporting documents",
-                width: 970,
-                height: 692,
+                alt: "School view of an approved application with status and supporting documents",
+                width: 4320,
+                height: 3765,
               },
               {
-                label: "Regional — review and endorsement",
+                label: "Regional — application review",
                 src: "/work/education-approval-workflow/approval-process-region.png",
-                alt: "Regional review screen with endorsement checklist and feedback to school",
-                width: 1024,
-                height: 685,
+                alt: "Regional review screen for a school capital project application",
+                width: 2880,
+                height: 1914,
               },
               {
                 label: "VSBA — assessment and recommendation",
                 src: "/work/education-approval-workflow/approval-process-vsba.png",
-                alt: "VSBA assessment screen with policy compliance checklist and executive recommendation",
-                width: 1024,
-                height: 811,
+                alt: "VSBA assessment screen with a recommendation for executive approval",
+                width: 2880,
+                height: 2276,
               },
             ],
           },
@@ -863,11 +878,12 @@ export const projects: Project[] = [
               'I mapped seven lifecycle triggers — submitted, endorsed, returned for amendment, feedback received, approved, not approved, draft reminder — and designed the channel pair for each: an in-portal notification centre with unread states, and email templates for the moments that matter. Every role got its own version, including SLA reminders for regional and VSBA staff ("this application has been in your queue 10 business days").',
             images: [
               {
-                label: "In-portal notification centre",
-                src: "/work/education-approval-workflow/notification-centre.png",
-                alt: "Notifications panel with unread states for submitted, returned, and feedback events",
-                width: 422,
-                height: 708,
+                label: "Notifications panel — assessment and executive",
+                src: "/work/education-approval-workflow/notification-panel-2.png",
+                alt: "Notifications panel with regional endorsements, executive decisions, and assessment SLA reminders",
+                width: 430,
+                height: 686,
+                naturalSize: true,
               },
               {
                 label: "Application submitted — what happens next",
@@ -908,10 +924,10 @@ export const projects: Project[] = [
         images: [
           {
             label: "VSBA School Portal — Feature Tracker",
-            src: "/work/education-approval-workflow/feature-tracker.png",
+            src: "/work/education-approval-workflow/feature-tracker-edited.png",
             alt: "Feature tracker spreadsheet with P0, P1, and P2 priorities for portal features",
-            width: 1024,
-            height: 453,
+            width: 3333,
+            height: 1653,
             caption:
               "Note: The provided wireframes are my personal design and are not a 1/1 copy of the SharePoint copy used by Department of Education.",
           },

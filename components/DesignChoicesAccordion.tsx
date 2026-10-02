@@ -23,6 +23,7 @@ export type DesignChoiceItem = {
     width?: number;
     height?: number;
     aspectRatio?: "square" | "video" | "portrait" | "wide";
+    naturalSize?: boolean;
   }[];
 };
 
