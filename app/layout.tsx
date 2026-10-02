@@ -9,8 +9,9 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "Personal portfolio website",
+  title: "miriniko.design — Product & service designer",
+  description:
+    "Product designer bridging policy thinking and digital experience, with a focus on service design.",
 };
 
 export default function RootLayout({

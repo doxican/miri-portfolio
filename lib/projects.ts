@@ -459,13 +459,13 @@ export const projects: Project[] = [
       "Process mapping · Service blueprint · Stakeholder workshops · System requirements · Wireframes for requester, team and manager views · Shared dashboard · Handoff to Granicus development",
     highlights: [],
     coverImage: {
-      src: "/work/hounslow-govservice/cover-mockup-17.png",
+      src: "/work/hounslow-govservice/cover.png",
       alt: "Laptop showing the ONE HOUNSLOW colleague portal with an approved School streets expansion case",
       width: 2400,
-      height: 1800,
+      height: 1955,
       unoptimized: true,
       thumbnail: {
-        src: "/work/hounslow-govservice/thumbnail-mockup-17.png",
+        src: "/work/hounslow-govservice/thumbnail.png",
         alt: "Laptop mockup of the ONE HOUNSLOW internal colleague portal",
         width: 2400,
         height: 1350,
