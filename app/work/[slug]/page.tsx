@@ -9,6 +9,8 @@ import SubsectionContent from "@/components/SubsectionContent";
 import CaseStudyImageCarousel from "@/components/CaseStudyImageCarousel";
 import DesignChoicesAccordion from "@/components/DesignChoicesAccordion";
 import CaseStudySubsectionsAccordion from "@/components/CaseStudySubsectionsAccordion";
+import CollapsibleBulletList from "@/components/CollapsibleBulletList";
+import CollapsibleDisclosure from "@/components/CollapsibleDisclosure";
 import { getProject, projects } from "@/lib/projects";
 
 type CaseStudyPageProps = {
@@ -20,21 +22,27 @@ function FigmaFileLink({
   label,
   lead = "See the full Figma file",
 }: {
-  href: string;
+  href?: string;
   label: string;
   lead?: string;
 }) {
   return (
     <p className="text-lg leading-relaxed text-muted">
       {lead}{" "}
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-foreground underline underline-offset-4 transition-colors hover:opacity-70"
-      >
-        {label}
-      </a>
+      {href ? (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-foreground underline underline-offset-4 transition-colors hover:opacity-70"
+        >
+          {label}
+        </a>
+      ) : (
+        <span className="text-foreground underline underline-offset-4">
+          {label}
+        </span>
+      )}
       .
     </p>
   );
@@ -239,22 +247,30 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                 {section.content}
               </p>
             ))}
-          {section.link && section.imagesLayout !== "accordion" && (
+          {section.link &&
+            section.imagesLayout !== "accordion" &&
+            !section.images?.length && (
             <FigmaFileLink
               href={section.link.href}
               label={section.link.label}
               lead={section.link.lead}
             />
           )}
-          {section.bullets && (
-            <ul className="list-disc space-y-3 pl-5 text-muted">
-              {section.bullets.map((bullet) => (
-                <li key={bullet} className="text-lg leading-relaxed">
-                  {bullet}
-                </li>
-              ))}
-            </ul>
-          )}
+          {section.bullets &&
+            (section.collapsibleBullets ? (
+              <CollapsibleBulletList
+                bullets={section.bullets}
+                expandLabel={section.bulletsLabel ?? "See more"}
+              />
+            ) : (
+              <ul className="list-disc space-y-3 pl-5 text-muted">
+                {section.bullets.map((bullet) => (
+                  <li key={bullet} className="text-lg leading-relaxed">
+                    {bullet}
+                  </li>
+                ))}
+              </ul>
+            ))}
           {section.subsectionGroups?.map((group) => (
             <div key={group.heading} className="space-y-4 pt-4">
               <h3 className="text-lg font-medium tracking-tight">
@@ -357,9 +373,11 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                 numbered={section.numberedSubsections}
               />
             ) : (
+            (() => {
+              const subsectionsContent = (
             <div
               className={
-                section.subsectionHeading
+                section.subsectionHeading || section.numberedSubsections
                   ? "border-l border-border pl-4 sm:pl-5"
                   : undefined
               }
@@ -432,6 +450,16 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             </div>
           ))}
             </div>
+              );
+
+              return section.collapsibleSubsectionsLabel ? (
+                <CollapsibleDisclosure label={section.collapsibleSubsectionsLabel}>
+                  {subsectionsContent}
+                </CollapsibleDisclosure>
+              ) : (
+                subsectionsContent
+              );
+            })()
             )
           )}
           {section.imagesHeading && (
@@ -533,6 +561,16 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             </ul>
             )
           )}
+          {section.imagesLayout !== "accordion" &&
+            section.images &&
+            section.images.length > 0 &&
+            section.link && (
+              <FigmaFileLink
+                href={section.link.href}
+                label={section.link.label}
+                lead={section.link.lead}
+              />
+            )}
           {section.carouselLead && (
             <p className="text-lg leading-relaxed text-muted">
               {section.carouselLead}

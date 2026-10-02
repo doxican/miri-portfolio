@@ -30,8 +30,10 @@ export type Project = {
     title: string;
     content?: string | string[];
     bullets?: string[];
+    collapsibleBullets?: boolean;
+    bulletsLabel?: string;
     link?: {
-      href: string;
+      href?: string;
       label: string;
       lead?: string;
     };
@@ -39,6 +41,7 @@ export type Project = {
     subsectionHeading?: string;
     numberedSubsections?: boolean;
     collapsibleSubsections?: boolean;
+    collapsibleSubsectionsLabel?: string;
     subsections?: {
       title: string;
       content?: string | string[];
@@ -440,29 +443,181 @@ export const projects: Project[] = [
   },
   {
     slug: "hounslow-govservice",
-    title: "London Borough of Hounslow",
-    subtitle: "Service design for a government consultation platform",
+    title: "Consultations and Engagement service",
+    subtitle:
+      "Internal workflow design for public consultations at Hounslow Council",
     client: "London Borough of Hounslow",
-    role: "Service Designer — GovService Platform",
-    dates: "2025–2026",
+    role: "Product / service designer",
+    dates: "2026",
     location: "London, UK",
-    overview:
-      "Designed an end-to-end digital service to manage consultation and engagement projects across a central service team, covering intake through to publication.",
-    highlights: [
-      "Designed an end-to-end digital service to manage consultation and engagement projects across a central service team, covering intake through to publication.",
-      "Mapped existing workflows and designed the service architecture, user journeys, and interface across multiple user roles within an established government platform.",
-      "Developed a reporting dashboard giving teams real-time visibility of project stages, supporting accountability and decision-making across the organisation.",
+    overview: [
+      "Hounslow Council wants residents to help shape the decisions that affect them. Public consultations are central to that — but the internal process behind each one was held together by forms and email, with no shared view of where a request stood or whether it was ready to go live.",
+      "I redesigned that process as a structured digital service for the Consultations and Engagement team: from request through team review and manager approval to publication. The work covered process mapping, system requirements, and wireframes for three connected roles, ready for build in Granicus.",
+      "The aim was straightforward: consultations that run on time, with clearer hand-offs between colleagues — and a foundation for closing the loop with residents once a consultation is live.",
     ],
+    roleSummary:
+      "Process mapping · Service blueprint · Stakeholder workshops · System requirements · Wireframes for requester, team and manager views · Shared dashboard · Handoff to Granicus development",
+    highlights: [],
+    coverImage: {
+      src: "/work/hounslow-govservice/cover-mockup-17.png",
+      alt: "Laptop showing the ONE HOUNSLOW colleague portal with an approved School streets expansion case",
+      width: 2400,
+      height: 1800,
+      unoptimized: true,
+      thumbnail: {
+        src: "/work/hounslow-govservice/thumbnail-mockup-17.png",
+        alt: "Laptop mockup of the ONE HOUNSLOW internal colleague portal",
+        width: 2400,
+        height: 1350,
+      },
+    },
     sections: [
       {
-        title: "Context",
+        title: "The problem",
+        content: [
+          "The internal process behind each consultation made both goals hard to meet. Colleagues in service areas asked the C&E team for a consultation through a Microsoft Form, and everything after that happened over email.",
+        ],
+        bullets: [
+          "Requests arrived incomplete. Key documents — the engagement plan, communications plan, and Equality Impact Assessment — came later, if at all.",
+          "No one could see where a case was. Status lived in inboxes, so delays only surfaced close to go-live.",
+          "Approval was informal. It wasn’t always clear who had signed off, or when.",
+          "The loop rarely closed. Once a consultation was published, there was no built-in step for evaluation and feedback to residents.",
+        ],
+      },
+      {
+        title: "My approach",
         content:
-          "Working within the constraints of an existing government platform, identified pain points across the team's fragmented manual processes and redesigned them as a structured, trackable digital workflow.",
+          "My brief was to understand the current process, find where it broke down, and define what the new system needed to do.",
+        numberedSubsections: true,
+        collapsibleSubsectionsLabel: "Four steps",
+        subsections: [
+          {
+            title: "Understand",
+            content:
+              "Mapped the existing process with the C&E team, step by step and role by role.",
+          },
+          {
+            title: "Diagnose",
+            content:
+              "Built a service blueprint to see what happens front-stage, back-stage and in supporting teams.",
+          },
+          {
+            title: "Agree",
+            content:
+              "Ran working sessions with the team, the Head of Engagement and requesters to agree one future workflow.",
+          },
+          {
+            title: "Define and design",
+            content:
+              "Turned the workflow into requirements and wireframes for the Granicus build, and refined them with the development team.",
+          },
+        ],
+      },
+      {
+        title: "Research and insights",
+        content:
+          "Mapping the current process showed 18 steps across six groups: senior staff, residents, the consultation lead, the C&E team, Policy and Insight, and other staff. The service blueprint and feedback from the Head of Service pointed to three insights.",
+        numberedSubsections: true,
+        subsections: [
+          {
+            title: "Three roles, one invisible hand-off chain.",
+            content:
+              "Requesters, the C&E team and the approving manager each saw only their own part of the process.",
+          },
+          {
+            title: "Quality depends on what arrives first.",
+            content:
+              "The engagement plan, communications plan and EqIA decide whether a consultation is ready. They needed to be requested in a structured way, not chased by email.",
+          },
+          {
+            title: "Evaluation was the missing stage.",
+            content:
+              "The Head of Service’s questions — “Did we reach the right people at the right time?”, “Were KPIs met?” — had nowhere to live in the process.",
+          },
+        ],
+      },
+      {
+        title: "Defining requirements",
+        content: [
+          "We agreed one workflow across the three roles. Two loops send work back: from the team to the requester, and from the manager to the team. I turned this into requirements for the Granicus build.",
+          "Publishing is the goal of this release. Evaluation is the planned extension that closes the loop.",
+        ],
+        collapsibleBullets: true,
+        bulletsLabel: "Requirements",
+        bullets: [
+          "Structured request form that asks for the C&E plan, communications plan and EqIA — so requests arrive complete the first time.",
+          "Shared case statuses that follow the workflow, from Submitted to Published — one picture of where every case is.",
+          "“Request more information” with a message, the documents needed, a reply-by date and an optional kick-off meeting — replacing chasing by email.",
+          "Formal approval step: approve, or send back with feedback — clear, recorded sign-off for managers.",
+          "Notifications at every hand-off — no one waits without knowing why.",
+          "Activity history on every case — accountability and an audit trail.",
+          "Publishing checklist before go-live — every consultation published to the same standard.",
+          "Evaluation stage as a planned extension — closes the loop with residents.",
+        ],
+      },
+      {
+        title: "Design",
+        content:
+          "I designed three connected views on one design system, extracted from the existing colleague portal so the new screens would feel familiar.",
+        numberedSubsections: true,
+        collapsibleSubsectionsLabel: "Main design choices",
+        subsections: [
+          {
+            title: "Requester journey",
+            content: [
+              "I recreated the current form, critiqued it, and redesigned it around ten improvements:",
+            ],
+            bullets: [
+              "A four-section progress stepper instead of nine wrapping tabs",
+              "Clear error messages and proper date fields",
+              "Follow-up questions that only appear when needed — for example, ward selection and Cabinet details",
+              "One simple EqIA status question",
+              "One main action per page",
+            ],
+          },
+          {
+            title: "One dashboard for the team and the manager",
+            content:
+              "Both roles start from the same screen: “Needs your action” puts the viewer’s own queue first, with the other role’s queue alongside; pipeline counts show one per workflow stage and who the case is waiting on; and the case table shows a status label and the next action on every case.",
+          },
+          {
+            title: "Case views for each step",
+            content:
+              "Each step of the workflow has its own screen: review, request more information, re-review, approve or send back, respond to feedback, publish. Every screen shares the same progress bar, status label and activity history, so a case reads the same whoever opens it.",
+          },
+        ],
+        imagesLayout: "stack",
+        images: [
+          {
+            label: "Project screenshots or wireframes",
+            aspectRatio: "video",
+          },
+        ],
+        link: {
+          lead: "See full Figma files",
+          href: "https://www.figma.com/design/6OUXhzjzMTyCR60eUGdNt9/Hounslow---Gov-Service?node-id=30-4057&t=DPa7tlXPCiXpSTFb-1",
+          label: "here",
+        },
       },
       {
         title: "Outcome",
-        content:
-          "The service reduced ambiguity at each handoff stage and gave leadership clear oversight of consultation activity across the organisation.",
+        content: [
+          "The requirements and wireframes were handed to the development team for the Granicus build.",
+          "The next iteration adds evaluation as an extension: findings analysed against agreed measures, feedback to residents, and lessons learnt fed into the next consultation. This is the step that fully closes the loop.",
+        ],
+        bullets: [
+          "Process map and improvement backlog for the C&E service",
+          "System requirements for the Granicus build",
+          "Wireframes for requester, team and manager views, plus a shared dashboard",
+        ],
+      },
+      {
+        title: "Reflections",
+        bullets: [
+          "Map the process before designing the screens. The biggest wins came from agreeing the workflow, not from the UI.",
+          "Design for hand-offs, not just roles. Most delays happened between people, so shared statuses and one activity history did more than any single screen.",
+          "Policy thinking helps. My public-sector background helped me translate a strategic objective into system requirements.",
+        ],
       },
     ],
   },
